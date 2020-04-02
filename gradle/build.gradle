@@ -27,3 +27,29 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compileOnly 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
 }
+
+spigot {
+    authors = ['github.com/xethlyx']
+    apiVersion = '1.15.2'
+    load = STARTUP
+    commands {
+        xenchant {
+            aliases = ['xench']
+            description = 'Enchant a tool with a custom enchant.'
+            permission = 'xenchant.command.enchant'
+            permissionMessage = 'You do not have permission!'
+            usage = '/<command> [enchantment] [level]'
+        }
+    }
+    permissions {
+        'xenchant.command.enchant' {
+            description = 'Permission for /xenchant command.'
+            defaults = 'op'
+        }
+        'xenchant.command.*' {
+            description = 'Wildcard permission for all enchants'
+            defaults = 'op'
+            children = ['xenchant.command.enchant': true]
+        }
+    }
+}

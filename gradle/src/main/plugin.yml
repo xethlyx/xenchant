@@ -1,5 +1,0 @@
-name: XEnchant
-version: 1.0-SNAPSHOT
-author: github.com/xethlyx
-main: com.xethlyx.plugins.xenchant.XEnchant
-api-version: 1.15.2
