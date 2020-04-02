@@ -17,7 +17,7 @@ public class XEnchantCommand implements CommandExecutor {
                 sender.sendMessage("Reloading..");
             }
             default: {
-                sender.sendMessage("Applying enchant " + args[0]);
+                sender.sendMessage("Applying enchant " + args[0] + "..");
             }
         }
         return true;
