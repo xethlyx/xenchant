@@ -20,5 +20,7 @@ public class XEnchantCommand implements CommandExecutor {
                 sender.sendMessage("Applying enchant " + args[0]);
             }
         }
+        return true;
     }
+
 }
