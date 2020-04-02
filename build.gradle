@@ -29,6 +29,7 @@ dependencies {
 }
 
 spigot {
+    name = 'XEnchant'
     authors = ['github.com/xethlyx']
     apiVersion = '1.15'
     load = STARTUP
