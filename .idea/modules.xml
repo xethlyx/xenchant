@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/xenchant.iml" filepath="$PROJECT_DIR$/.idea/modules/xenchant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xenchant.main.iml" filepath="$PROJECT_DIR$/.idea/modules/xenchant.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xenchant.test.iml" filepath="$PROJECT_DIR$/.idea/modules/xenchant.test.iml" />
     </modules>
   </component>
 </project>
