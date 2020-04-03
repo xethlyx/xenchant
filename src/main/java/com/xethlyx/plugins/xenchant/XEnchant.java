@@ -1,6 +1,7 @@
 package com.xethlyx.plugins.xenchant;
 
 import com.xethlyx.plugins.xenchant.commands.XEnchantCommand;
+import com.xethlyx.plugins.xenchant.enchants.Beheading;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class XEnchant extends JavaPlugin {
@@ -9,7 +10,7 @@ public class XEnchant extends JavaPlugin {
         getLogger().info("Starting initialization of enchants..");
         this.getCommand("xenchant").setExecutor(new XEnchantCommand());
 
-        // new Beheading().registerEnchant();
+        new Beheading().registerEnchant();
 
         getLogger().info("There are currently " + EnchantRegistry.EnchantList.size() + " enchants registered.");
 
