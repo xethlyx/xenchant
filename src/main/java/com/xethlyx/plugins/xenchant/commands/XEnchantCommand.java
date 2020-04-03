@@ -1,5 +1,8 @@
 package com.xethlyx.plugins.xenchant.commands;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.xethlyx.plugins.xenchant.XEnchant;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -7,15 +10,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import java.io.BufferedInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
 
 public class XEnchantCommand implements CommandExecutor {
-    public static void updatePlugin() throws IOException {
+    public static void updatePlugin() throws Exception {
         final String fileName = new java.io.File(XEnchant.class.getProtectionDomain()
             .getCodeSource()
             .getLocation()
@@ -23,6 +24,25 @@ public class XEnchantCommand implements CommandExecutor {
             .getName();
 
         final String downloadUrl = "https://jenkins.xethlyx.com/job/XEnchant/lastSuccessfulBuild/artifact/build/libs/xenchant-1.0-SNAPSHOT.jar";
+        final String jsonUrl = "https://jenkins.xethlyx.com/job/XEnchant/api/json";
+        final String currentVersion = XEnchant.Instance.getDescription().getVersion();
+
+        String latestVersion;
+        // First check for updates
+        {
+            URL url = new URL(jsonUrl);
+            URLConnection request = url.openConnection();
+            request.connect();
+
+            JsonParser jsonParser = new JsonParser();
+            JsonElement root = jsonParser.parse(new InputStreamReader((InputStream) request.getContent()));
+            JsonObject rootObj = root.getAsJsonObject();
+            latestVersion = rootObj.get("lastSuccessfulBuild").getAsJsonObject().get("number").getAsString();
+        }
+
+        if ((currentVersion.substring(0, currentVersion.length() - (latestVersion.length() + 1)) + latestVersion).equals("-" + currentVersion)) {
+            throw new Exception("Already up to date!");
+        }
 
         URLConnection downloadConnection = null;
 
@@ -63,7 +83,7 @@ public class XEnchantCommand implements CommandExecutor {
 
                 try {
                     updatePlugin();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     sender.sendMessage(ChatColor.RED + "The plugin could not auto update: " + e);
                     return true;
                 }
