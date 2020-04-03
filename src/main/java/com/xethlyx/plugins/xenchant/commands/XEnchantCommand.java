@@ -62,7 +62,7 @@ public class XEnchantCommand implements CommandExecutor {
                 try {
                     updatePlugin();
                 } catch (IOException e) {
-                    sender.sendMessage(ChatColor.GREEN + "The plugin could not auto update: " + e);
+                    sender.sendMessage(ChatColor.RED + "The plugin could not auto update: " + e);
                     return true;
                 }
 
