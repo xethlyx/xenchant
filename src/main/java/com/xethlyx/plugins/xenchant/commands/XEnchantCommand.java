@@ -15,6 +15,31 @@ import java.net.URLConnection;
 import java.util.logging.Level;
 
 public class XEnchantCommand implements CommandExecutor {
+    public static void updatePlugin() throws IOException {
+        final String fileName = new java.io.File(XEnchant.class.getProtectionDomain()
+            .getCodeSource()
+            .getLocation()
+            .getPath())
+            .getName();
+
+        final String downloadUrl = "https://jenkins.xethlyx.com/job/XEnchant/lastSuccessfulBuild/artifact/build/libs/xenchant-1.0-SNAPSHOT.jar";
+
+        URLConnection downloadConnection = null;
+
+        downloadConnection = new URL(downloadUrl).openConnection();
+        downloadConnection.addRequestProperty("User-Agent", "Mozilla");
+        downloadConnection.setReadTimeout(5000);
+        downloadConnection.setConnectTimeout(5000);
+
+        BufferedInputStream in = new BufferedInputStream(new URL(downloadUrl).openStream());
+        FileOutputStream fileOutputStream = new FileOutputStream(XEnchant.Instance.getDataFolder().getAbsolutePath() + "/" + fileName);
+        byte dataBuffer[] = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+            fileOutputStream.write(dataBuffer, 0, bytesRead);
+        }
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length < 1) {
@@ -34,29 +59,11 @@ public class XEnchantCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.GRAY + "Current file name is " + fileName);
                 sender.sendMessage(ChatColor.GRAY + "Current download path is " + XEnchant.Instance.getDataFolder().getAbsolutePath() + "/" + fileName);
 
-                final String downloadUrl = "https://jenkins.xethlyx.com/job/XEnchant/lastSuccessfulBuild/artifact/build/libs/xenchant-1.0-SNAPSHOT.jar";
-
-                URLConnection downloadConnection = null;
                 try {
-                    downloadConnection = new URL(downloadUrl).openConnection();
+                    updatePlugin();
                 } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                downloadConnection.addRequestProperty("User-Agent", "Mozilla");
-                downloadConnection.setReadTimeout(5000);
-                downloadConnection.setConnectTimeout(5000);
-
-                try (BufferedInputStream in = new BufferedInputStream(new URL(downloadUrl).openStream());
-                     FileOutputStream fileOutputStream = new FileOutputStream(XEnchant.Instance.getDataFolder().getAbsolutePath() + "/" + fileName)) {
-                     byte dataBuffer[] = new byte[1024];
-                     int bytesRead;
-                     while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
-                        fileOutputStream.write(dataBuffer, 0, bytesRead);
-                     }
-                } catch (IOException e) {
-                     sender.sendMessage(ChatColor.RED + "Update failed! Reason: " + e);
-                     return true;
+                    sender.sendMessage(ChatColor.GREEN + "The plugin could not auto update: " + e);
+                    return true;
                 }
 
                 sender.sendMessage(ChatColor.GREEN + "Downloaded! The update will be applied on the next restart.");
