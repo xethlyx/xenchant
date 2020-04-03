@@ -31,8 +31,9 @@ public class XEnchantCommand implements CommandExecutor {
         downloadConnection.setReadTimeout(5000);
         downloadConnection.setConnectTimeout(5000);
 
-        BufferedInputStream in = new BufferedInputStream(new URL(downloadUrl).openStream());
+        BufferedInputStream in = new BufferedInputStream(downloadConnection.getInputStream());
         FileOutputStream fileOutputStream = new FileOutputStream(XEnchant.Instance.getDataFolder().getAbsolutePath() + "/" + fileName);
+
         byte dataBuffer[] = new byte[1024];
         int bytesRead;
         while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
