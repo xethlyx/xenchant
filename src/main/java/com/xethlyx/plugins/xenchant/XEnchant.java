@@ -11,7 +11,8 @@ public class XEnchant extends JavaPlugin {
         getLogger().info("Starting initialization of enchants..");
         this.getCommand("xenchant").setExecutor(new XEnchantCommand());
 
-        EnchantRegistry.registerEnchant(new Beheading());
+        Beheading beheadingEnchant = new Beheading();
+        EnchantRegistry.registerEnchant(beheadingEnchant);
 
         Bukkit.broadcastMessage("There are currently " + EnchantRegistry.EnchantList.size() + " enchants registered.");
         getLogger().info("There are currently " + EnchantRegistry.EnchantList.size() + " enchants registered.");
