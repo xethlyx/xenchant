@@ -17,19 +17,21 @@ public class XEnchantCommand implements CommandExecutor {
 
         switch(args[0]) {
             case "update": {
-                sender.sendMessage("Checking for updates..");
+                sender.sendMessage(ChatColor.GREEN + "Checking for updates..");
                 break;
             }
             case "debug": {
+                sender.sendMessage(ChatColor.GREEN + "Changing logging level..");
                 Bukkit.getLogger().setLevel(Level.ALL);
                 sender.sendMessage(ChatColor.GREEN + "Logging level has been changed to all.");
+                break;
             }
             case "reload": {
-                sender.sendMessage("Reloading..");
+                sender.sendMessage(ChatColor.RED + "Reloading..");
                 break;
             }
             default: {
-                sender.sendMessage("Applying enchant " + args[0] + "..");
+                sender.sendMessage(ChatColor.GREEN + "Applying enchant " + args[0] + "..");
             }
         }
         return true;
