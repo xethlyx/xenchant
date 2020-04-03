@@ -1,9 +1,12 @@
 package com.xethlyx.plugins.xenchant.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+
+import java.util.logging.Level;
 
 public class XEnchantCommand implements CommandExecutor {
     @Override
@@ -16,6 +19,10 @@ public class XEnchantCommand implements CommandExecutor {
             case "update": {
                 sender.sendMessage("Checking for updates..");
                 break;
+            }
+            case "debug": {
+                Bukkit.getLogger().setLevel(Level.ALL);
+                sender.sendMessage(ChatColor.GREEN + "Logging level has been changed to all.");
             }
             case "reload": {
                 sender.sendMessage("Reloading..");
