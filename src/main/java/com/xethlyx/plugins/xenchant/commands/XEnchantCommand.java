@@ -30,8 +30,9 @@ public class XEnchantCommand implements CommandExecutor {
         String latestVersion;
         // First check for updates
         {
-            URL url = new URL(jsonUrl);
-            URLConnection request = url.openConnection();
+            URLConnection request = new URL(jsonUrl).openConnection();
+            request.addRequestProperty("User-Agent", "Mozilla");
+            request.getHeaderField("cache-control: no-cache");
             request.connect();
 
             JsonParser jsonParser = new JsonParser();
