@@ -71,10 +71,7 @@ public class XEnchantCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.GREEN + "Downloaded! Attempting to apply update automatically...");
                 sender.sendMessage(ChatColor.DARK_GRAY + " - " + ChatColor.GRAY + "Current version: " + ChatColor.GREEN + XEnchant.Instance.getDescription().getVersion());
                 sender.sendMessage(ChatColor.DARK_GRAY + " - " + ChatColor.GRAY + "Updated version: " + ChatColor.GREEN + "Latest");
-                XEnchant.Instance.getServer().getPluginManager().disablePlugin(XEnchant.Instance);
-                XEnchant.Instance.getServer().getPluginManager().enablePlugin(XEnchant.Instance);
-                sender.sendMessage(ChatColor.DARK_GRAY + " - " + ChatColor.GRAY + "Current version: " + ChatColor.GREEN + XEnchant.Instance.getDescription().getVersion());
-                sender.sendMessage(ChatColor.GREEN + "Done!");
+                sender.sendMessage(ChatColor.RED + "We currently cannot update automatically - you will need to restart the plugin manually.");
 
                 break;
             }
