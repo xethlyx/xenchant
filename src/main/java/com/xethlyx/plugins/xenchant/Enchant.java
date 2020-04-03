@@ -13,6 +13,8 @@ public abstract class Enchant<T extends Listener> {
     public T Listener;
 
     public boolean registerEnchant() {
-        return EnchantRegistry.registerEnchant(this);
+        EnchantRegistry.EnchantList.add(this);
+
+        return true;
     }
 }
