@@ -41,7 +41,7 @@ public class XEnchantCommand implements CommandExecutor {
             latestVersion = rootObj.get("lastSuccessfulBuild").getAsJsonObject().get("number").getAsString();
         }
 
-        if ((currentVersion.substring(0, currentVersion.length() - (latestVersion.length() + 1)) + latestVersion).equals("-" + currentVersion)) {
+        if ((currentVersion.substring(0, currentVersion.length() - (latestVersion.length() + 1)) + "-" + latestVersion).equals(currentVersion)) {
             throw new Exception("Already up to date!");
         }
 
