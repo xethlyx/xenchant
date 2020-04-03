@@ -31,16 +31,18 @@ public class XEnchantCommand implements CommandExecutor {
                     .getName();
 
                 sender.sendMessage(ChatColor.GRAY + "Current file name is " + fileName);
+                sender.sendMessage(ChatColor.GRAY + "Current download path is " + XEnchant.Instance.getDataFolder().getAbsolutePath() + fileName);
 
                 try (BufferedInputStream in = new BufferedInputStream(new URL("https://jenkins.xethlyx.com/job/XEnchant/lastSuccessfulBuild/artifact/build/libs/xenchant-1.0-SNAPSHOT.jar").openStream());
                      FileOutputStream fileOutputStream = new FileOutputStream(XEnchant.Instance.getDataFolder().getAbsolutePath() + fileName)) {
-                    byte dataBuffer[] = new byte[1024];
-                    int bytesRead;
-                    while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+                     byte dataBuffer[] = new byte[1024];
+                     int bytesRead;
+                     while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
                         fileOutputStream.write(dataBuffer, 0, bytesRead);
-                    }
+                     }
                 } catch (IOException e) {
-                    sender.sendMessage(ChatColor.RED + "Update failed! Reason: " + e);
+                     sender.sendMessage(ChatColor.RED + "Update failed! Reason: " + e);
+                     return true;
                 }
 
                 sender.sendMessage(ChatColor.GREEN + "Downloaded! The update will be applied on the next restart.");
