@@ -67,7 +67,10 @@ public class XEnchantCommand implements CommandExecutor {
                     return true;
                 }
 
-                sender.sendMessage(ChatColor.GREEN + "Downloaded! The update will be applied on the next restart.");
+                sender.sendMessage(ChatColor.GREEN + "Downloaded! Attempting to apply update automatically...");
+                XEnchant.Instance.getServer().getPluginManager().disablePlugin(XEnchant.Instance);
+                XEnchant.Instance.getServer().getPluginManager().enablePlugin(XEnchant.Instance);
+                sender.sendMessage(ChatColor.GREEN + "Done!");
 
                 break;
             }
