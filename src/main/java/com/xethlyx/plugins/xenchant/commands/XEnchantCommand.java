@@ -32,7 +32,7 @@ public class XEnchantCommand implements CommandExecutor {
         downloadConnection.setConnectTimeout(5000);
 
         BufferedInputStream in = new BufferedInputStream(downloadConnection.getInputStream());
-        FileOutputStream fileOutputStream = new FileOutputStream(XEnchant.Instance.getDataFolder().getAbsolutePath() + "/" + fileName);
+        FileOutputStream fileOutputStream = new FileOutputStream(XEnchant.Instance.getDataFolder() + "/" + fileName);
 
         byte dataBuffer[] = new byte[1024];
         int bytesRead;
@@ -58,7 +58,7 @@ public class XEnchantCommand implements CommandExecutor {
                     .getName();
 
                 sender.sendMessage(ChatColor.GRAY + "Current file name is " + fileName);
-                sender.sendMessage(ChatColor.GRAY + "Current download path is " + XEnchant.Instance.getDataFolder().getAbsolutePath() + "/" + fileName);
+                sender.sendMessage(ChatColor.GRAY + "Current download path is " + XEnchant.Instance.getDataFolder() + "/" + fileName);
 
                 try {
                     updatePlugin();
