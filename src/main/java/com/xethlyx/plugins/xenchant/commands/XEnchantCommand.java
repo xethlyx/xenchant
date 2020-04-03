@@ -11,6 +11,7 @@ import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.logging.Level;
 
 public class XEnchantCommand implements CommandExecutor {
@@ -33,7 +34,20 @@ public class XEnchantCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.GRAY + "Current file name is " + fileName);
                 sender.sendMessage(ChatColor.GRAY + "Current download path is " + XEnchant.Instance.getDataFolder().getAbsolutePath() + "/" + fileName);
 
-                try (BufferedInputStream in = new BufferedInputStream(new URL("https://jenkins.xethlyx.com/job/XEnchant/lastSuccessfulBuild/artifact/build/libs/xenchant-1.0-SNAPSHOT.jar").openStream());
+                final String downloadUrl = "https://jenkins.xethlyx.com/job/XEnchant/lastSuccessfulBuild/artifact/build/libs/xenchant-1.0-SNAPSHOT.jar";
+
+                URLConnection downloadConnection = null;
+                try {
+                    downloadConnection = new URL(downloadUrl).openConnection();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                downloadConnection.addRequestProperty("User-Agent", "Mozilla");
+                downloadConnection.setReadTimeout(5000);
+                downloadConnection.setConnectTimeout(5000);
+
+                try (BufferedInputStream in = new BufferedInputStream(new URL(downloadUrl).openStream());
                      FileOutputStream fileOutputStream = new FileOutputStream(XEnchant.Instance.getDataFolder().getAbsolutePath() + "/" + fileName)) {
                      byte dataBuffer[] = new byte[1024];
                      int bytesRead;
