@@ -1,7 +1,6 @@
 package com.xethlyx.plugins.xenchant;
 
 import com.xethlyx.plugins.xenchant.commands.XEnchantCommand;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class XEnchant extends JavaPlugin {
@@ -12,7 +11,6 @@ public class XEnchant extends JavaPlugin {
 
         // new Beheading().registerEnchant();
 
-        Bukkit.broadcastMessage("There are currently " + EnchantRegistry.EnchantList.size() + " enchants registered.");
         getLogger().info("There are currently " + EnchantRegistry.EnchantList.size() + " enchants registered.");
 
         for (Object enchant : EnchantRegistry.EnchantList) {
