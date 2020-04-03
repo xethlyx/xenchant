@@ -3,7 +3,7 @@ package com.xethlyx.plugins.xenchant;
 import org.bukkit.entity.Item;
 import org.bukkit.event.Listener;
 
-public abstract class Enchant<T extends Listener> {
+public class Enchant<T extends Listener> {
     public String Name;
     public String Description;
 
