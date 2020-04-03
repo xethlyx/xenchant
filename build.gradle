@@ -3,7 +3,6 @@ plugins {
     id 'kr.entree.spigradle' version '1.2.1'
 }
 
-def buildNumber = System.getenv('BUILD_NUMBER')
 def versionNumber = '1.0-SNAPSHOT'
 
 group 'com.xethlyx.plugins'
@@ -33,7 +32,7 @@ dependencies {
 
 spigot {
     name = 'XEnchant'
-    version = buildNumber ? versionNumber + buildNumber : versionNumber
+    version = versionNumber + '-' + System.getenv('BUILD_NUMBER')
     authors = ['github.com/xethlyx']
     apiVersion = '1.15'
     load = STARTUP
