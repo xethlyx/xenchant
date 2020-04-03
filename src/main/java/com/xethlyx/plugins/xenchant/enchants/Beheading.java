@@ -11,6 +11,7 @@ public class Beheading extends Enchant<BeheadingListeners> {
     public Item[] AllowedItems;
 
     public Beheading() {
+        super();
         Listener = new BeheadingListeners();
     }
 }
