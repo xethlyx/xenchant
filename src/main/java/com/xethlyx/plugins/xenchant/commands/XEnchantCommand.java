@@ -1,5 +1,6 @@
 package com.xethlyx.plugins.xenchant.commands;
 
+import com.xethlyx.plugins.xenchant.XEnchant;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -18,6 +19,14 @@ public class XEnchantCommand implements CommandExecutor {
         switch(args[0]) {
             case "update": {
                 sender.sendMessage(ChatColor.GREEN + "Checking for updates..");
+
+                String fileName = new java.io.File(XEnchant.class.getProtectionDomain()
+                    .getCodeSource()
+                    .getLocation()
+                    .getPath())
+                    .getName();
+
+                sender.sendMessage("Current file name is " + fileName);
                 break;
             }
             case "debug": {
