@@ -11,10 +11,10 @@ public class XEnchant extends JavaPlugin {
 
         EnchantRegistry.registerEnchant(new Beheading());
 
-        getLogger().info("There are currently " + EnchantRegistry.EnchantList.size() + " enchants registered.");
+        getLogger().warning("There are currently " + EnchantRegistry.EnchantList.size() + " enchants registered.");
 
         for (Enchant enchant : EnchantRegistry.EnchantList) {
-            getLogger().info("Registering listener for enchantment " + enchant.Name + "...");
+            getLogger().warning("Registering listener for enchantment " + enchant.Name + "...");
             getServer().getPluginManager().registerEvents(enchant.Listener, this);
         }
     }
