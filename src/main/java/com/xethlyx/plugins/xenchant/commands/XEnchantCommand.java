@@ -26,8 +26,9 @@ public class XEnchantCommand implements CommandExecutor {
 
         URLConnection downloadConnection = null;
 
-        downloadConnection = new URL(downloadUrl).openConnection();
+        downloadConnection = new URL(downloadUrl + "?t=" + System.currentTimeMillis()).openConnection();
         downloadConnection.addRequestProperty("User-Agent", "Mozilla");
+        downloadConnection.getHeaderField("cache-control: no-cache");
         downloadConnection.setReadTimeout(5000);
         downloadConnection.setConnectTimeout(5000);
 
