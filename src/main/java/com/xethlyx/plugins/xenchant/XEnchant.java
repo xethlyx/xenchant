@@ -5,8 +5,12 @@ import com.xethlyx.plugins.xenchant.enchants.Beheading;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class XEnchant extends JavaPlugin {
+    public static XEnchant Instance;
+
     @Override
     public void onEnable() {
+        Instance = this;
+
         getLogger().info("Starting initialization of enchants..");
         this.getCommand("xenchant").setExecutor(new XEnchantCommand());
 
