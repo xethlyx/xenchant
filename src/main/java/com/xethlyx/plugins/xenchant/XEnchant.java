@@ -15,7 +15,7 @@ public class XEnchant extends JavaPlugin {
 
         for (Enchant enchant : EnchantRegistry.EnchantList) {
             getLogger().info("Registering listener for enchantment " + enchant.Name + "...");
-            getPluginManager().registerEvents(enchant.Listener, this);
+            getServer().getPluginManager().registerEvents(enchant.Listener, this);
         }
     }
 
