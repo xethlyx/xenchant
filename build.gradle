@@ -4,9 +4,10 @@ plugins {
 }
 
 def buildNumber = System.getenv('BUILD_NUMBER')
+def versionNumber = '1.0-SNAPSHOT'
 
 group 'com.xethlyx.plugins'
-version buildNumber ? '1.0-SNAPSHOT-' + buildNumber : '1.0-SNAPSHOT'
+version versionNumber
 
 sourceCompatibility = 1.8
 
@@ -32,6 +33,7 @@ dependencies {
 
 spigot {
     name = 'XEnchant'
+    version = buildNumber ? versionNumber + buildNumber : versionNumber
     authors = ['github.com/xethlyx']
     apiVersion = '1.15'
     load = STARTUP
