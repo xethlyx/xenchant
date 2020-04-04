@@ -12,6 +12,10 @@ public class Enchant<T extends Listener> {
 
     public T Listener;
 
+    public boolean checkEnchant(Item item) {
+        return false;
+    }
+
     public boolean registerEnchant() {
         EnchantRegistry.EnchantList.add(this);
 

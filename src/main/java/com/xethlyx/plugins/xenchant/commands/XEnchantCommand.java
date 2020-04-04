@@ -56,7 +56,7 @@ public class XEnchantCommand implements CommandExecutor {
         BufferedInputStream in = new BufferedInputStream(downloadConnection.getInputStream());
         FileOutputStream fileOutputStream = new FileOutputStream("plugins/" + fileName);
 
-        byte dataBuffer[] = new byte[1024];
+        byte[] dataBuffer = new byte[1024];
         int bytesRead;
         while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
             fileOutputStream.write(dataBuffer, 0, bytesRead);
