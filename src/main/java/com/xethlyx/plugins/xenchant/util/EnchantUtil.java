@@ -21,7 +21,7 @@ public class EnchantUtil {
         put("X", 10);
     }};
 
-    public static <U extends Enchant> int parseEnchant(U enchant, ItemStack item) {
+    public static <U extends Enchant> int parseEnchant(Class<U> enchant, ItemStack item) throws NoSuchFieldException {
         if (item.getItemMeta() == null) {
             return 0;
         }
@@ -33,10 +33,10 @@ public class EnchantUtil {
 
         for (String lore : itemLore) {
             XEnchant.Instance.getLogger().info(lore);
-            XEnchant.Instance.getLogger().info(enchant.Name);
-            if (lore.substring(0, enchant.Name.length()).equals(enchant.Name)) {
+            XEnchant.Instance.getLogger().info(String.valueOf(enchant.getField("Name")));
+            if (lore.substring(0, String.valueOf(enchant.getField("Name")).length()).equals(String.valueOf(enchant.getField("Name")))) {
                 // Lore exists, get level
-                return RomanNumeralConversion.get(lore.substring(enchant.Name.length() + 1));
+                return RomanNumeralConversion.get(lore.substring(String.valueOf(enchant.getField("Name")).length() + 1));
             }
         }
 
