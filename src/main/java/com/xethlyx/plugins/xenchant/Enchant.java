@@ -21,15 +21,15 @@ public class Enchant<T extends Listener> {
         put("X", 10);
     }};
 
-    public static String Name;
-    public static String Description;
+    public String Name;
+    public String Description;
 
-    public static int MaxLevel;
-    public static Item[] AllowedItems;
+    public int MaxLevel;
+    public Item[] AllowedItems;
 
     public T Listener;
 
-    public static int parseEnchant(ItemStack item) {
+    public int parseEnchant(ItemStack item) {
         if (item.getItemMeta() == null) {
             return 0;
         }
