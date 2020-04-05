@@ -1,5 +1,6 @@
 package com.xethlyx.plugins.xenchant.enchants;
 
+import com.xethlyx.plugins.xenchant.util.EnchantUtil;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.*;
@@ -19,7 +20,7 @@ public class BeheadingListeners implements Listener {
             return;
         }
 
-        int enchantLevel = new Beheading().parseEnchant(killer.getInventory().getItemInMainHand());
+        int enchantLevel = EnchantUtil.parseEnchant(new Beheading(), killer.getInventory().getItemInMainHand());
 
         if (enchantLevel < 1) {
             return;
