@@ -41,6 +41,7 @@ public class Enchant<T extends Listener> {
 
         for (String lore : itemLore) {
             XEnchant.Instance.getLogger().info(lore);
+            XEnchant.Instance.getLogger().info(Name);
             if (lore.substring(0, Name.length()).equals(Name)) {
                 // Lore exists, get level
                 return RomanNumeralConversion.get(lore.substring(Name.length() + 1));
