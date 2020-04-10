@@ -26,7 +26,7 @@ public class XEnchant extends JavaPlugin {
         getLogger().info("There are currently " + EnchantRegistry.EnchantList.size() + " enchant(s) registered and pending initialization.");
 
         for (HashMap.Entry<String, Enchant<? extends Listener>> enchant : EnchantRegistry.EnchantList.entrySet()) {
-            getLogger().info("Registering listener for enchantment " + (enchant.getValue().Name + "...");
+            getLogger().info("Registering listener for enchantment " + (enchant.getValue().Name + "..."));
             getServer().getPluginManager().registerEvents(enchant.getValue().EnchantListener, this);
         }
 
