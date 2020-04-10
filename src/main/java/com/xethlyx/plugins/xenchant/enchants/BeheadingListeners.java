@@ -20,7 +20,7 @@ public class BeheadingListeners implements Listener {
             return;
         }
 
-        int enchantLevel = EnchantUtil.parseEnchant(new Beheading(), killer.getInventory().getItemInMainHand());
+        int enchantLevel = EnchantUtil.parseEnchant("beheading", killer.getInventory().getItemInMainHand());
 
         if (enchantLevel < 1) {
             return;

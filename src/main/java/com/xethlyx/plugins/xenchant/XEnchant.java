@@ -4,6 +4,8 @@ import com.xethlyx.plugins.xenchant.commands.XEnchantCommand;
 import com.xethlyx.plugins.xenchant.enchants.Beheading;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
+
 public class XEnchant extends JavaPlugin {
     public static XEnchant Instance;
 
@@ -14,13 +16,17 @@ public class XEnchant extends JavaPlugin {
         getLogger().info("Starting initialization of enchants..");
         this.getCommand("xenchant").setExecutor(new XEnchantCommand());
 
+        // Register Enchants
+
         new Beheading().registerEnchant();
+
+        // Do other stuff
 
         getLogger().info("There are currently " + EnchantRegistry.EnchantList.size() + " enchant(s) registered and pending initialization.");
 
-        for (Object enchant : EnchantRegistry.EnchantList) {
+        for (HashMap.Entry<String, Enchant> enchant : EnchantRegistry.EnchantList.entrySet()) {
             getLogger().info("Registering listener for enchantment " + ((Enchant)enchant).Name + "...");
-            getServer().getPluginManager().registerEvents(((Enchant)enchant).Listener, this);
+            getServer().getPluginManager().registerEvents(((Enchant) enchant).EnchantListener, this);
         }
 
         getLogger().info("Enchant initialization finished!");

@@ -10,10 +10,5 @@ public class Enchant<T extends Listener> {
     public int MaxLevel = 0;
     public Item[] AllowedItems = new Item[0];
 
-    public T Listener;
-
-    public void registerEnchant() {
-        EnchantRegistry.EnchantList.add(this);
-
-    }
+    public T EnchantListener = null;
 }

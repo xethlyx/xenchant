@@ -1,16 +1,23 @@
 package com.xethlyx.plugins.xenchant.enchants;
 
 import com.xethlyx.plugins.xenchant.Enchant;
+import com.xethlyx.plugins.xenchant.EnchantRegistry;
+import com.xethlyx.plugins.xenchant.util.EnchantRegister;
 import org.bukkit.entity.Item;
 
-public class Beheading extends Enchant<BeheadingListeners> {
-    public String Name = "Beheading";
-    public String Description = "An enchantment that allows you to collect the skulls of victims when they die.";
+public class Beheading extends EnchantRegister {
+    @Override
+    public void registerEnchant() {
+        Enchant beheadingEnchant = new Enchant<BeheadingListeners>();
 
-    public int MaxLevel = 1;
-    public Item[] AllowedItems = new Item[0];
+        beheadingEnchant.Name = "Beheading";
+        beheadingEnchant.Description = "An enchantment that allows you to collect the skulls of victims when they die.";
 
-    public Beheading() {
-        Listener = new BeheadingListeners();
+        beheadingEnchant.MaxLevel = 4;
+        beheadingEnchant.AllowedItems = new Item[0];
+
+        beheadingEnchant.EnchantListener = new BeheadingListeners();
+
+        EnchantRegistry.registerEnchant("beheading", beheadingEnchant);
     }
 }

@@ -1,6 +1,7 @@
 package com.xethlyx.plugins.xenchant.util;
 
 import com.xethlyx.plugins.xenchant.Enchant;
+import com.xethlyx.plugins.xenchant.EnchantRegistry;
 import com.xethlyx.plugins.xenchant.XEnchant;
 import org.bukkit.inventory.ItemStack;
 
@@ -21,7 +22,11 @@ public class EnchantUtil {
         put("X", 10);
     }};
 
-    public static <U extends Enchant> int parseEnchant(U enchant, ItemStack item) {
+    public static int parseEnchant(String enchantId, ItemStack item) {
+        return parseEnchant(EnchantRegistry.getEnchant(enchantId), item);
+    }
+
+    public static int parseEnchant(Enchant enchant, ItemStack item) {
         if (item.getItemMeta() == null) {
             return 0;
         }
