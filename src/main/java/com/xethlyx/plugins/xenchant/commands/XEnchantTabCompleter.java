@@ -4,14 +4,14 @@ import com.xethlyx.plugins.xenchant.Enchant;
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class XEnchantTabCompleter implements TabExecutor {
+public class XEnchantTabCompleter implements TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
@@ -44,6 +44,7 @@ public class XEnchantTabCompleter implements TabExecutor {
 
                 List<String> availableEnchantLevels = new ArrayList<>();
 
+                availableEnchantLevels.add("0");
                 availableEnchantLevels.add("1");
                 availableEnchantLevels.add("2");
                 availableEnchantLevels.add("3");
@@ -63,7 +64,7 @@ public class XEnchantTabCompleter implements TabExecutor {
         }
     }
 
-    List<String> getMatchedAsType(String typed, List<String> values) {
+    private List<String> getMatchedAsType(String typed, List<String> values) {
         List<String> completions = new ArrayList<>();
 
         for (String element : values) {
@@ -73,10 +74,5 @@ public class XEnchantTabCompleter implements TabExecutor {
         }
 
         return completions;
-    }
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        return true;
     }
 }
