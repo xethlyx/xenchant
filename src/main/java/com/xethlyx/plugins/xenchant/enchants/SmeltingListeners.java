@@ -23,6 +23,7 @@ public class SmeltingListeners implements Listener {
         int enchantLevel = EnchantUtil.parseEnchant("smelting", player.getInventory().getItemInMainHand());
 
         if (enchantLevel < 1) return;
+        if (event.isCancelled()) return;
         if (!event.isDropItems()) return;
 
         Material replacement = SmeltConversionTable.get(event.getBlock().getType());
