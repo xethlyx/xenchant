@@ -4,14 +4,14 @@ import com.xethlyx.plugins.xenchant.Enchant;
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class XEnchantTabCompleter implements TabCompleter {
+public class XEnchantTabCompleter implements TabExecutor {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
@@ -19,8 +19,12 @@ public class XEnchantTabCompleter implements TabCompleter {
             return null;
         }
 
+        if (!sender.hasPermission("xenchant.command.enchant")) {
+            return new ArrayList<>();
+        }
+
         switch (args.length) {
-            case 0: {
+            case 1: {
                 List<String> availableEnchantsAndCommands = new ArrayList<>();
 
                 for (Map.Entry<String, Enchant<? extends Listener>> enchant : EnchantRegistry.EnchantList.entrySet()) {
@@ -30,12 +34,12 @@ public class XEnchantTabCompleter implements TabCompleter {
                 availableEnchantsAndCommands.add("update");
                 availableEnchantsAndCommands.add("reload");
 
-                return availableEnchantsAndCommands;
+                return getMatchedAsType(args[0], availableEnchantsAndCommands);
             }
 
-            case 1: {
+            case 2: {
                 if (EnchantRegistry.getEnchant(args[0]) == null) {
-                    return null;
+                    return new ArrayList<>();
                 }
 
                 List<String> availableEnchantLevels = new ArrayList<>();
@@ -51,11 +55,28 @@ public class XEnchantTabCompleter implements TabCompleter {
                 availableEnchantLevels.add("9");
                 availableEnchantLevels.add("10");
 
-                return availableEnchantLevels;
+                return getMatchedAsType(args[1], availableEnchantLevels);
             }
             default: {
-                return null;
+                return new ArrayList<>();
             }
         }
+    }
+
+    List<String> getMatchedAsType(String typed, List<String> values) {
+        List<String> completions = new ArrayList<>();
+
+        for (String element : values) {
+            if (element.startsWith(typed)) {
+                completions.add(element);
+            }
+        }
+
+        return completions;
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        return true;
     }
 }
