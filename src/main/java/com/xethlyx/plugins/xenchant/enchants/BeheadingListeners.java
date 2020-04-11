@@ -1,7 +1,6 @@
 package com.xethlyx.plugins.xenchant.enchants;
 
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
-import com.xethlyx.plugins.xenchant.XEnchant;
 import com.xethlyx.plugins.xenchant.util.EnchantUtil;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -48,11 +47,8 @@ public class BeheadingListeners implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().getType() != InventoryType.ANVIL) return;
-        XEnchant.Instance.getLogger().info("Is anvil " + event.getSlot() + " " + event.getRawSlot());
         if (event.getRawSlot() != event.getView().convertSlot(event.getRawSlot())) return;
-        XEnchant.Instance.getLogger().info("Is in anvil at " + event.getRawSlot());
         if (event.getRawSlot() != 2) return;
-        XEnchant.Instance.getLogger().info("Is result");
 
         ItemStack itemToChange = event.getInventory().getItem(0);
         ItemStack itemToAdd = event.getInventory().getItem(1);
@@ -61,17 +57,13 @@ public class BeheadingListeners implements Listener {
         if (!EnchantUtil.verifyEnchantCompatibility("beheading", itemToChange)) return;
         if (itemToAdd.getType() != Material.WITHER_SKELETON_SKULL) return;
 
-        XEnchant.Instance.getLogger().info("pass stage 1");
-
         int enchantLevel = EnchantUtil.parseEnchant("beheading", itemToChange);
         enchantLevel += itemToAdd.getAmount();
 
         if (enchantLevel > EnchantRegistry.getEnchant("beheading").MaxLevel) return;
-        XEnchant.Instance.getLogger().info("pass stage 2");
 
         ItemStack result = itemToChange.clone();
         EnchantUtil.modifyEnchant(result, EnchantRegistry.getEnchant("beheading"), enchantLevel);
-        XEnchant.Instance.getLogger().info("set res");
 
         event.setCurrentItem(result);
     }
