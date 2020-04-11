@@ -109,6 +109,9 @@ public class EnchantUtil {
             if (matchEnchant(lore.get(i), enchant.Name)) {
                 lore.remove(i);
 
+                meta.setLore(lore);
+                item.setItemMeta(meta);
+
                 return true;
             }
         }
