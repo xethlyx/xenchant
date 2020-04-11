@@ -2,8 +2,6 @@ package com.xethlyx.plugins.xenchant.util;
 
 import com.xethlyx.plugins.xenchant.Enchant;
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
-import com.xethlyx.plugins.xenchant.XEnchant;
-import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -41,8 +39,7 @@ public class EnchantUtil {
     }
 
     public static boolean matchEnchant(String matchString, String enchantName) {
-        XEnchant.Instance.getLogger().info(ChatColor.GRAY + enchantName);
-        return matchString.substring(0, enchantName.length() + 2).equals(ChatColor.GRAY + enchantName);
+        return matchString.substring(0, enchantName.length() + 2).equals("\u00A77" + enchantName);
     }
 
     public static int parseEnchant(Enchant enchant, ItemStack item) {
