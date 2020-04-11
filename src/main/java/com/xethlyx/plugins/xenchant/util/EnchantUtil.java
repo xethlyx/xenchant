@@ -4,6 +4,7 @@ import com.xethlyx.plugins.xenchant.Enchant;
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -42,11 +43,9 @@ public class EnchantUtil {
         return verifyEnchantCompatibility(EnchantRegistry.getEnchant(enchant), item);
     }
 
-    public static boolean verifyEnchantCompatibility(Enchant enchant, ItemStack item) {
-        for (Object o : enchant.AllowedItems) {
-            Material checkedItem = (Material) o;
-
-            if (item.getType() == checkedItem) return true;
+    public static boolean verifyEnchantCompatibility(Enchant<? extends Listener> enchant, ItemStack item) {
+        for (Material material : enchant.AllowedItems) {
+            if (material == item.getType()) return true;
         }
 
         return false;
