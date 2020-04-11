@@ -3,17 +3,26 @@ package com.xethlyx.plugins.xenchant.commands;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.xethlyx.plugins.xenchant.Enchant;
+import com.xethlyx.plugins.xenchant.EnchantRegistry;
 import com.xethlyx.plugins.xenchant.XEnchant;
-import org.bukkit.Bukkit;
+import com.xethlyx.plugins.xenchant.util.EnchantUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
+import java.util.ArrayList;
+import java.util.List;
 
 public class XEnchantCommand implements CommandExecutor {
     public static void updatePlugin() throws Exception {
@@ -96,18 +105,48 @@ public class XEnchantCommand implements CommandExecutor {
 
                 break;
             }
-            case "debug": {
-                sender.sendMessage(ChatColor.GREEN + "Changing logging level..");
-                Bukkit.getLogger().setLevel(Level.ALL);
-                sender.sendMessage(ChatColor.GREEN + "Logging level has been changed to all.");
-                break;
-            }
             case "reload": {
-                sender.sendMessage(ChatColor.RED + "Reloading..");
+                sender.sendMessage(ChatColor.RED + "Reloading.. (not implemented)");
                 break;
             }
             default: {
+                Enchant enchant = EnchantRegistry.getEnchant(args[0]);
+
+                if (args.length < 2) {
+                    return false;
+                }
+
+                if (enchant == null) {
+                    sender.sendMessage(ChatColor.RED + "No enchant exists by the id " + args[0] + "!");
+                    return true;
+                }
+
                 sender.sendMessage(ChatColor.GREEN + "Applying enchant " + args[0] + "..");
+
+                ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
+
+                // get enchantment line
+
+                String enchantLoreString = ChatColor.GRAY + enchant.Name + " " + EnchantUtil.RomanNumeralConversionRev.get(Integer.parseInt(args[2]));
+
+                if (EnchantUtil.parseEnchant(enchant, item) == 0) {
+                    ItemMeta meta = item.getItemMeta();
+                    ArrayList<String> newLore = new ArrayList<String>(0);
+                    newLore.add(enchantLoreString);
+
+                    meta.setLore(newLore);
+                } else {
+                    ItemMeta meta = item.getItemMeta();
+                    List<String> lore = meta.getLore();
+
+                    for (int i = 0; i < lore.size(); i++) {
+                        if (EnchantUtil.matchEnchant(lore.get(i), enchant.Name)) {
+                            lore.set(i, enchantLoreString);
+
+                            break;
+                        }
+                    }
+                }
             }
         }
         return true;

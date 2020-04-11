@@ -2,6 +2,7 @@ package com.xethlyx.plugins.xenchant.util;
 
 import com.xethlyx.plugins.xenchant.Enchant;
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
+import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -21,8 +22,25 @@ public class EnchantUtil {
         put("X", 10);
     }};
 
+    public static final HashMap<Integer, String> RomanNumeralConversionRev = new HashMap<Integer, String>() {{
+        put(1, "I");
+        put(2, "II");
+        put(3, "III");
+        put(4, "IV");
+        put(5, "V");
+        put(6, "VI");
+        put(7, "VII");
+        put(8, "VIII");
+        put(9, "IX");
+        put(10, "X");
+    }};
+
     public static int parseEnchant(String enchantId, ItemStack item) {
         return parseEnchant(EnchantRegistry.getEnchant(enchantId), item);
+    }
+
+    public static boolean matchEnchant(String matchString, String enchantName) {
+        return matchString.substring(0, enchantName.length() + 2).equals(ChatColor.GRAY + enchantName);
     }
 
     public static int parseEnchant(Enchant enchant, ItemStack item) {
@@ -40,9 +58,7 @@ public class EnchantUtil {
                 continue;
             }
 
-            // extra 2 for color codes
-            if (lore.substring(2, enchant.Name.length() + 2).equals(enchant.Name)) {
-                // Lore exists, get level
+            if (matchEnchant(lore, enchant.Name)) {
                 return RomanNumeralConversion.get(lore.substring(enchant.Name.length() + 3));
             }
         }
