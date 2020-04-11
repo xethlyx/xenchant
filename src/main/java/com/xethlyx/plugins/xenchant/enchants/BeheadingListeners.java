@@ -52,6 +52,13 @@ public class BeheadingListeners implements Listener {
         ItemStack itemToChange = event.getInventory().getItem(0);
         ItemStack itemToAdd = event.getInventory().getItem(1);
 
+        switch (event.getRawSlot()) {
+            case 0:
+                itemToChange = event.getWhoClicked().getItemOnCursor();
+            case 1:
+                itemToAdd = event.getWhoClicked().getItemOnCursor();
+        }
+
         if (itemToChange == null || itemToAdd == null) return;
         if (!EnchantUtil.verifyEnchantCompatibility("beheading", itemToChange)) return;
         if (itemToAdd.getType() != Material.WITHER_SKELETON_SKULL) return;
