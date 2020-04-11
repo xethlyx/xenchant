@@ -10,6 +10,8 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.util.Random;
+
 public class BeheadingListeners implements Listener {
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) {
@@ -23,6 +25,11 @@ public class BeheadingListeners implements Listener {
         int enchantLevel = EnchantUtil.parseEnchant("beheading", killer.getInventory().getItemInMainHand());
 
         if (enchantLevel < 1) {
+            return;
+        }
+
+        if (new Random().nextFloat() > enchantLevel * 0.1) {
+            // RNGesus did not say yes
             return;
         }
         
