@@ -71,7 +71,7 @@ public class BeheadingListeners implements Listener {
         event.getClickedInventory().setItem(0, new ItemStack(Material.AIR));
         event.getClickedInventory().setItem(1, new ItemStack(Material.AIR));
         event.getClickedInventory().setItem(2, new ItemStack(Material.AIR));
-        event.setCursor(result);
+        event.getWhoClicked().setItemOnCursor(result);
     }
 
     @EventHandler
