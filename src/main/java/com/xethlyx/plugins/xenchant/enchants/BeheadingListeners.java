@@ -1,7 +1,9 @@
 package com.xethlyx.plugins.xenchant.enchants;
 
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
+import com.xethlyx.plugins.xenchant.XEnchant;
 import com.xethlyx.plugins.xenchant.util.EnchantUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.*;
@@ -63,7 +65,9 @@ public class BeheadingListeners implements Listener {
         ItemStack result = itemToChange.clone();
         EnchantUtil.modifyEnchant(result, EnchantRegistry.getEnchant("beheading"), enchantLevel);
 
-        event.getClickedInventory().setItem(2, result);
+        Bukkit.getScheduler().runTaskLater(XEnchant.Instance, () -> {
+            event.getClickedInventory().setItem(2, result);
+        }, 1);
 
         if (event.getRawSlot() != 2) return;
 
