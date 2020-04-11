@@ -124,7 +124,7 @@ public class XEnchantCommand implements CommandExecutor {
                 }
 
                 if (!EnchantUtil.verifyEnchantCompatibility(enchant, ((Player) sender).getInventory().getItemInMainHand())) {
-                    sender.sendMessage(ChatColor.RED + "Your tool does not support " + enchant.MaxLevel + "!");
+                    sender.sendMessage(ChatColor.RED + "Your tool does not support " + enchant.Name + "!");
                     return true;
                 }
 
