@@ -39,8 +39,8 @@ public class BeheadingListeners implements Listener {
         ItemStack result = itemToChange.clone();
         EnchantUtil.modifyEnchant(result, EnchantRegistry.getEnchant("beheading"), enchantLevel);
 
-        event.getInventory().setRepairCost(5 * itemToAdd.getAmount());
-        event.getInventory().setItem(2, result);
+        //event.getInventory().setRepairCost(5 * itemToAdd.getAmount());
+        //event.getInventory().setItem(2, result);
         event.setResult(result);
     }
 
@@ -48,7 +48,7 @@ public class BeheadingListeners implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().getType() != InventoryType.ANVIL) return;
         if (event.getRawSlot() != event.getView().convertSlot(event.getRawSlot())) return;
-//        if (event.getRawSlot() != 2) return;
+        if (event.getRawSlot() != 2) return;
 
         ItemStack itemToChange = event.getInventory().getItem(0);
         ItemStack itemToAdd = event.getInventory().getItem(1);
