@@ -36,20 +36,20 @@ public class BeheadingListeners implements Listener {
         ItemStack skull = null;
 
         if (victim instanceof Player) {
-            skull = new ItemStack(Material.getMaterial("PLAYER_HEAD"));
+            skull = new ItemStack(Material.PLAYER_HEAD);
             SkullMeta meta = (SkullMeta) skull.getItemMeta();
 
             meta.setOwningPlayer((OfflinePlayer) victim);
         } else if (victim instanceof Zombie) {
-            skull = new ItemStack(Material.getMaterial("ZOMBIE_HEAD"));
+            skull = new ItemStack(Material.ZOMBIE_HEAD);
         } else if (victim instanceof WitherSkeleton) {
-            skull = new ItemStack(Material.getMaterial("WITHER_SKELETON_SKULL"));
+            skull = new ItemStack(Material.WITHER_SKELETON_SKULL);
         } else if (victim instanceof Skeleton) {
-            skull = new ItemStack(Material.getMaterial("SKELETON_SKULL"));
+            skull = new ItemStack(Material.SKELETON_SKULL);
         } else if (victim instanceof Creeper) {
-            skull = new ItemStack(Material.getMaterial("CREEPER_HEAD"));
+            skull = new ItemStack(Material.CREEPER_HEAD);
         } else if (victim instanceof EnderDragon) {
-            skull = new ItemStack(Material.getMaterial("DRAGON_HEAD"));
+            skull = new ItemStack(Material.DRAGON_HEAD);
         }
 
         if (skull != null) {
