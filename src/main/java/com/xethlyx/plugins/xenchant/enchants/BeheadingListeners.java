@@ -68,6 +68,9 @@ public class BeheadingListeners implements Listener {
         if (event.getRawSlot() != 2) return;
 
         // debug
+        event.getClickedInventory().setItem(0, new ItemStack(Material.AIR));
+        event.getClickedInventory().setItem(1, new ItemStack(Material.AIR));
+        event.getClickedInventory().setItem(2, new ItemStack(Material.AIR));
         event.setCursor(result);
     }
 
