@@ -127,7 +127,7 @@ public class XEnchantCommand implements CommandExecutor {
 
                 // get enchantment line
 
-                String enchantLoreString = ChatColor.GRAY + enchant.Name + " " + EnchantUtil.RomanNumeralConversionRev.get(Integer.parseInt(args[2]));
+                String enchantLoreString = ChatColor.GRAY + enchant.Name + " " + EnchantUtil.RomanNumeralConversionRev.get(Integer.parseInt(args[1]));
 
                 if (EnchantUtil.parseEnchant(enchant, item) == 0) {
                     ItemMeta meta = item.getItemMeta();
