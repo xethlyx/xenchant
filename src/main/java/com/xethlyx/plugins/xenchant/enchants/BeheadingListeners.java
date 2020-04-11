@@ -66,7 +66,6 @@ public class BeheadingListeners implements Listener {
 
         if (event.getRawSlot() != 2) {
             event.getClickedInventory().setItem(2, result);
-            ((Player) event.getWhoClicked()).updateInventory();
             return;
         }
 
