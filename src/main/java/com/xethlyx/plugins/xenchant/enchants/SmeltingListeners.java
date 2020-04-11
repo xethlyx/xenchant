@@ -22,9 +22,8 @@ public class SmeltingListeners implements Listener {
         int enchantLevel = EnchantUtil.parseEnchant("smelting", player.getInventory().getItemInMainHand());
 
         if (enchantLevel == 0) return;
-        if (!event.isDropItems()) return;
 
-        XEnchant.Instance.getLogger().info("Can drop");
+        XEnchant.Instance.getLogger().info("Can drop: " + (event.isDropItems() ? "yes" : "no"));
 
         event.setDropItems(false);
 
@@ -35,7 +34,7 @@ public class SmeltingListeners implements Listener {
             XEnchant.Instance.getLogger().info("Searching drops");
 
             if (replacement == null) continue;
-            
+
             XEnchant.Instance.getLogger().info("Dropping");
 
             event.getBlock().setType(Material.AIR);
