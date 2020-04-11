@@ -30,8 +30,8 @@ public class SmeltingListeners implements Listener {
         if (replacement == null) return;
 
         event.setDropItems(false);
-        event.getBlock().getWorld().dropItem(
-                event.getBlock().getLocation(),
+        event.getBlock().getWorld().dropItemNaturally(
+                event.getBlock().getLocation().add(0.5, 0.5, 0.5),
                 new ItemStack(replacement)
         );
     }
