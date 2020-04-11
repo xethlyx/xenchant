@@ -65,11 +65,12 @@ public class BeheadingListeners implements Listener {
         ItemStack result = itemToChange.clone();
         EnchantUtil.modifyEnchant(result, EnchantRegistry.getEnchant("beheading"), enchantLevel);
 
-        Bukkit.getScheduler().runTaskLater(XEnchant.Instance, () -> {
-            event.getClickedInventory().setItem(2, result);
-        }, 1);
-
-        if (event.getRawSlot() != 2) return;
+        if (event.getRawSlot() != 2) {
+            Bukkit.getScheduler().runTaskLater(XEnchant.Instance, () -> {
+                event.getClickedInventory().setItem(2, result);
+            }, 1);
+            return;
+        }
 
         // debug
         event.getClickedInventory().setItem(0, new ItemStack(Material.AIR));
