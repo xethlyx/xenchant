@@ -61,13 +61,17 @@ public class BeheadingListeners implements Listener {
         if (!EnchantUtil.verifyEnchantCompatibility("beheading", itemToChange)) return;
         if (itemToAdd.getType() != Material.WITHER_SKELETON_SKULL) return;
 
+        XEnchant.Instance.getLogger().info("pass stage 1");
+
         int enchantLevel = EnchantUtil.parseEnchant("beheading", itemToChange);
         enchantLevel += itemToAdd.getAmount();
 
         if (enchantLevel > EnchantRegistry.getEnchant("beheading").MaxLevel) return;
+        XEnchant.Instance.getLogger().info("pass stage 2");
 
         ItemStack result = itemToChange.clone();
         EnchantUtil.modifyEnchant(result, EnchantRegistry.getEnchant("beheading"), enchantLevel);
+        XEnchant.Instance.getLogger().info("set res");
 
         event.setCurrentItem(result);
     }
