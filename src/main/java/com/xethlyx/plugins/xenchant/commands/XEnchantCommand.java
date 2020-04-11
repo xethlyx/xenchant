@@ -121,6 +121,11 @@ public class XEnchantCommand implements CommandExecutor {
                     return true;
                 }
 
+                if (Integer.parseInt(args[2]) > 10) {
+                    sender.sendMessage(ChatColor.RED + "Max enchant level is 10!");
+                    return true;
+                }
+
                 sender.sendMessage(ChatColor.GREEN + "Applying enchant " + args[0] + "..");
 
                 ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
@@ -129,28 +134,30 @@ public class XEnchantCommand implements CommandExecutor {
 
                 String enchantLoreString = ChatColor.GRAY + enchant.Name + " " + EnchantUtil.RomanNumeralConversionRev.get(Integer.parseInt(args[1]));
 
-                if (EnchantUtil.parseEnchant(enchant, item) == 0) {
-                    ItemMeta meta = item.getItemMeta();
-                    ArrayList<String> newLore = new ArrayList<String>(0);
-                    newLore.add(enchantLoreString);
+                ItemMeta meta = item.getItemMeta();
+                List<String> lore = meta.getLore();
 
-                    meta.setLore(newLore);
-                    item.setItemMeta(meta);
+                boolean foundEnchant = false;
+
+                if (lore == null) {
+                    lore = new ArrayList<>(1);
                 } else {
-                    ItemMeta meta = item.getItemMeta();
-                    List<String> lore = meta.getLore();
-
                     for (int i = 0; i < lore.size(); i++) {
                         if (EnchantUtil.matchEnchant(lore.get(i), enchant.Name)) {
                             lore.set(i, enchantLoreString);
+                            foundEnchant = true;
 
                             break;
                         }
                     }
-
-                    meta.setLore(lore);
-                    item.setItemMeta(meta);
                 }
+
+                if (!foundEnchant) {
+                    lore.add(enchantLoreString);
+                }
+
+                meta.setLore(lore);
+                item.setItemMeta(meta);
             }
         }
         return true;
