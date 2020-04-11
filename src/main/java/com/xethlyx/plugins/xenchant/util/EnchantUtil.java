@@ -3,6 +3,7 @@ package com.xethlyx.plugins.xenchant.util;
 import com.xethlyx.plugins.xenchant.Enchant;
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -36,6 +37,20 @@ public class EnchantUtil {
         put(9, "IX");
         put(10, "X");
     }};
+
+    public static boolean verifyEnchantCompatibility(String enchant, ItemStack item) {
+        return verifyEnchantCompatibility(EnchantRegistry.getEnchant(enchant), item);
+    }
+
+    public static boolean verifyEnchantCompatibility(Enchant enchant, ItemStack item) {
+        for (Object o : enchant.AllowedItems) {
+            Material checkedItem = (Material) o;
+
+            if (item.getType() == checkedItem) return true;
+        }
+
+        return false;
+    }
 
     public static int parseEnchant(String enchantId, ItemStack item) {
         return parseEnchant(EnchantRegistry.getEnchant(enchantId), item);
