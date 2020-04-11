@@ -19,9 +19,11 @@ public class SmeltingListeners implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
 
+        XEnchant.Instance.getLogger().info("plr is " + player.getName());
+
         int enchantLevel = EnchantUtil.parseEnchant("smelting", player.getInventory().getItemInMainHand());
 
-        if (enchantLevel == 0) return;
+        if (enchantLevel < 1) return;
 
         XEnchant.Instance.getLogger().info("Can drop: " + (event.isDropItems() ? "yes" : "no"));
 
