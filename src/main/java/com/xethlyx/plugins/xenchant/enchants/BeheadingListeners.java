@@ -5,13 +5,11 @@ import com.xethlyx.plugins.xenchant.util.EnchantUtil;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.*;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
@@ -19,37 +17,36 @@ import java.util.Random;
 
 public class BeheadingListeners implements Listener {
 
-    @EventHandler
-    public void onAnvilPrepare(PrepareAnvilEvent event) {
-        ItemStack itemToChange = event.getInventory().getItem(0);
-        if (event.getResult() != null && event.getResult().getType() != Material.AIR) {
-            itemToChange = event.getResult();
-        }
-
-        ItemStack itemToAdd = event.getInventory().getItem(1);
-
-        if (itemToChange == null || itemToAdd == null) return;
-        if (!EnchantUtil.verifyEnchantCompatibility("beheading", itemToChange)) return;
-        if (itemToAdd.getType() != Material.WITHER_SKELETON_SKULL) return;
-
-        int enchantLevel = EnchantUtil.parseEnchant("beheading", itemToChange);
-        enchantLevel += itemToAdd.getAmount();
-
-        if (enchantLevel > EnchantRegistry.getEnchant("beheading").MaxLevel) return;
-
-        ItemStack result = itemToChange.clone();
-        EnchantUtil.modifyEnchant(result, EnchantRegistry.getEnchant("beheading"), enchantLevel);
-
-        //event.getInventory().setRepairCost(5 * itemToAdd.getAmount());
-        //event.getInventory().setItem(2, result);
-        event.setResult(result);
-    }
+//    @EventHandler
+//    public void onAnvilPrepare(PrepareAnvilEvent event) {
+//        ItemStack itemToChange = event.getInventory().getItem(0);
+//        if (event.getResult() != null && event.getResult().getType() != Material.AIR) {
+//            itemToChange = event.getResult();
+//        }
+//
+//        ItemStack itemToAdd = event.getInventory().getItem(1);
+//
+//        if (itemToChange == null || itemToAdd == null) return;
+//        if (!EnchantUtil.verifyEnchantCompatibility("beheading", itemToChange)) return;
+//        if (itemToAdd.getType() != Material.WITHER_SKELETON_SKULL) return;
+//
+//        int enchantLevel = EnchantUtil.parseEnchant("beheading", itemToChange);
+//        enchantLevel += itemToAdd.getAmount();
+//
+//        if (enchantLevel > EnchantRegistry.getEnchant("beheading").MaxLevel) return;
+//
+//        ItemStack result = itemToChange.clone();
+//        EnchantUtil.modifyEnchant(result, EnchantRegistry.getEnchant("beheading"), enchantLevel);
+//
+//        //event.getInventory().setRepairCost(5 * itemToAdd.getAmount());
+//        //event.getInventory().setItem(2, result);
+//        event.setResult(result);
+//    }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().getType() != InventoryType.ANVIL) return;
         if (event.getRawSlot() != event.getView().convertSlot(event.getRawSlot())) return;
-        if (event.getRawSlot() != 2) return;
 
         ItemStack itemToChange = event.getInventory().getItem(0);
         ItemStack itemToAdd = event.getInventory().getItem(1);
@@ -66,8 +63,10 @@ public class BeheadingListeners implements Listener {
         ItemStack result = itemToChange.clone();
         EnchantUtil.modifyEnchant(result, EnchantRegistry.getEnchant("beheading"), enchantLevel);
 
-        event.setCancelled(false);
-        event.setResult(Event.Result.ALLOW);
+        event.getClickedInventory().setItem(2, result);
+
+        if (event.getRawSlot() != 2) return;
+        
         event.setCurrentItem(result);
     }
 
