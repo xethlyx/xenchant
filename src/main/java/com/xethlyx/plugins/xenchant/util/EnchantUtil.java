@@ -2,7 +2,6 @@ package com.xethlyx.plugins.xenchant.util;
 
 import com.xethlyx.plugins.xenchant.Enchant;
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
-import com.xethlyx.plugins.xenchant.XEnchant;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -37,15 +36,12 @@ public class EnchantUtil {
         }
 
         for (String lore : itemLore) {
-            XEnchant.Instance.getLogger().info(lore);
-            XEnchant.Instance.getLogger().info(enchant.Name);
-            XEnchant.Instance.getLogger().info(lore.substring(2, enchant.Name.length()));
-
             if (enchant.Name.length() > lore.length()) {
                 continue;
             }
 
-            if (lore.substring(2, enchant.Name.length()).equals(enchant.Name)) {
+            // extra 2 for color codes
+            if (lore.substring(2, enchant.Name.length() + 2).equals(enchant.Name)) {
                 // Lore exists, get level
                 return RomanNumeralConversion.get(lore.substring(enchant.Name.length() + 3));
             }
