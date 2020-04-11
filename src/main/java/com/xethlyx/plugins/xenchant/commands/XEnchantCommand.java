@@ -131,6 +131,8 @@ public class XEnchantCommand implements CommandExecutor {
                     } else {
                         sender.sendMessage(ChatColor.RED + "Could not find enchant " + args[0] + " on item!");
                     }
+                    
+                    return true;
                 } else {
                     sender.sendMessage(ChatColor.GOLD + "Applying enchant " + args[0] + " " + EnchantUtil.RomanNumeralConversionRev.get(Integer.parseInt(args[1])) + "..");
                 }
