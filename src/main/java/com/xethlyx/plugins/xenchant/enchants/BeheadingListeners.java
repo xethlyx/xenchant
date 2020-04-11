@@ -1,6 +1,7 @@
 package com.xethlyx.plugins.xenchant.enchants;
 
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
+import com.xethlyx.plugins.xenchant.XEnchant;
 import com.xethlyx.plugins.xenchant.util.EnchantUtil;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -42,7 +43,10 @@ public class BeheadingListeners implements Listener {
 
         //event.getInventory().setRepairCost(5 * itemToAdd.getAmount());
         //event.getInventory().setItem(2, result);
-        event.setResult(result);
+        XEnchant.Instance.getServer().getScheduler().runTask(XEnchant.Instance, () -> {
+            event.getInventory().setItem(2, result);
+        });
+        //event.setResult(result);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -52,13 +56,6 @@ public class BeheadingListeners implements Listener {
 
         ItemStack itemToChange = event.getInventory().getItem(0);
         ItemStack itemToAdd = event.getInventory().getItem(1);
-
-        switch (event.getRawSlot()) {
-            case 0:
-                itemToChange = event.getWhoClicked().getItemOnCursor();
-            case 1:
-                itemToAdd = event.getWhoClicked().getItemOnCursor();
-        }
 
         if (itemToChange == null || itemToAdd == null) return;
         if (!EnchantUtil.verifyEnchantCompatibility("beheading", itemToChange)) return;
@@ -73,7 +70,6 @@ public class BeheadingListeners implements Listener {
         EnchantUtil.modifyEnchant(result, EnchantRegistry.getEnchant("beheading"), enchantLevel);
 
         if (event.getRawSlot() != 2) {
-            // event.getClickedInventory().setItem(2, result);
             return;
         }
 
