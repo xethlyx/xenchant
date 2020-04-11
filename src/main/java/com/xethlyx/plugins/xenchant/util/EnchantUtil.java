@@ -2,6 +2,7 @@ package com.xethlyx.plugins.xenchant.util;
 
 import com.xethlyx.plugins.xenchant.Enchant;
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
+import com.xethlyx.plugins.xenchant.XEnchant;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
@@ -40,7 +41,7 @@ public class EnchantUtil {
     }
 
     public static boolean matchEnchant(String matchString, String enchantName) {
-        console.log(ChatColor.GRAY + enchantName);
+        XEnchant.Instance.getLogger().info(ChatColor.GRAY + enchantName);
         return matchString.substring(0, enchantName.length() + 2).equals(ChatColor.GRAY + enchantName);
     }
 
