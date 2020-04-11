@@ -18,7 +18,7 @@ public class BeheadingListeners implements Listener {
 
     @EventHandler
     public void onAnvilPrepare(PrepareAnvilEvent event) {
-
+        if (event.getInventory().getItem(0) == null) return;
 
         if (EnchantUtil.verifyEnchantCompatibility("beheading", event.getInventory().getItem(0))) {
             XEnchant.Instance.getLogger().info("compat");
