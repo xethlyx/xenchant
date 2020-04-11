@@ -1,6 +1,5 @@
 package com.xethlyx.plugins.xenchant.enchants;
 
-import com.xethlyx.plugins.xenchant.XEnchant;
 import com.xethlyx.plugins.xenchant.util.EnchantUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -21,32 +20,19 @@ public class SmeltingListeners implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
 
-        XEnchant.Instance.getLogger().info("plr is " + player.getName());
-
         int enchantLevel = EnchantUtil.parseEnchant("smelting", player.getInventory().getItemInMainHand());
 
         if (enchantLevel < 1) return;
+        if (!event.isDropItems()) return;
 
-        XEnchant.Instance.getLogger().info("Can drop: " + (event.isDropItems() ? "yes" : "no"));
+        Material replacement = SmeltConversionTable.get(event.getBlock().getType());
+
+        if (replacement == null) return;
 
         event.setDropItems(false);
-
-        for (int i = 0; i < event.getBlock().getDrops().size(); i++) {
-            Material block = (Material) event.getBlock().getDrops().toArray()[i];
-            Material replacement = SmeltConversionTable.get(block);
-
-            XEnchant.Instance.getLogger().info("Searching drops");
-
-            if (replacement == null) continue;
-
-            XEnchant.Instance.getLogger().info("Dropping");
-
-            event.getBlock().setType(Material.AIR);
-
-            event.getBlock().getWorld().dropItem(
+        event.getBlock().getWorld().dropItem(
                 event.getBlock().getLocation(),
                 new ItemStack(replacement)
-            );
-        }
+        );
     }
 }
