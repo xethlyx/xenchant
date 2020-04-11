@@ -1,13 +1,12 @@
 package com.xethlyx.plugins.xenchant.enchants;
 
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
-import com.xethlyx.plugins.xenchant.XEnchant;
 import com.xethlyx.plugins.xenchant.util.EnchantUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -45,7 +44,7 @@ public class BeheadingListeners implements Listener {
 //        event.setResult(result);
 //    }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().getType() != InventoryType.ANVIL) return;
         //if (event.getRawSlot() != event.getView().convertSlot(event.getRawSlot())) return;
@@ -66,9 +65,8 @@ public class BeheadingListeners implements Listener {
         EnchantUtil.modifyEnchant(result, EnchantRegistry.getEnchant("beheading"), enchantLevel);
 
         if (event.getRawSlot() != 2) {
-            Bukkit.getScheduler().runTaskLater(XEnchant.Instance, () -> {
-                event.getClickedInventory().setItem(2, result);
-            }, 1);
+            event.getClickedInventory().setItem(2, result);
+            ((Player) event.getWhoClicked()).updateInventory();
             return;
         }
 
