@@ -34,7 +34,7 @@ public class XEnchantTabCompleter implements TabCompleter {
             }
 
             case 1: {
-                if (EnchantRegistry.getEnchant(args[1]) == null) {
+                if (EnchantRegistry.getEnchant(args[0]) == null) {
                     return null;
                 }
 
