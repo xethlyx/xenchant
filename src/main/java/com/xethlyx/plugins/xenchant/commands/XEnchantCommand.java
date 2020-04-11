@@ -13,7 +13,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
@@ -21,8 +20,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
 
 public class XEnchantCommand implements CommandExecutor {
     public static void updatePlugin() throws Exception {
@@ -126,38 +123,15 @@ public class XEnchantCommand implements CommandExecutor {
                     return true;
                 }
 
+
+
                 sender.sendMessage(ChatColor.GREEN + "Applying enchant " + args[0] + "..");
 
                 ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
 
                 // get enchantment line
 
-                String enchantLoreString = ChatColor.GRAY + enchant.Name + " " + EnchantUtil.RomanNumeralConversionRev.get(Integer.parseInt(args[1]));
-
-                ItemMeta meta = item.getItemMeta();
-                List<String> lore = meta.getLore();
-
-                boolean foundEnchant = false;
-
-                if (lore == null) {
-                    lore = new ArrayList<>(1);
-                } else {
-                    for (int i = 0; i < lore.size(); i++) {
-                        if (EnchantUtil.matchEnchant(lore.get(i), enchant.Name)) {
-                            lore.set(i, enchantLoreString);
-                            foundEnchant = true;
-
-                            break;
-                        }
-                    }
-                }
-
-                if (!foundEnchant) {
-                    lore.add(enchantLoreString);
-                }
-
-                meta.setLore(lore);
-                item.setItemMeta(meta);
+                EnchantUtil.modifyEnchant(item, enchant, Integer.parseInt(args[1]));
             }
         }
         return true;

@@ -4,7 +4,9 @@ import com.xethlyx.plugins.xenchant.Enchant;
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -64,5 +66,34 @@ public class EnchantUtil {
         }
 
         return 0;
+    }
+
+    public static void modifyEnchant(ItemStack item, Enchant enchant, int newLevel) {
+        String enchantLoreString = ChatColor.GRAY + enchant.Name + " " + EnchantUtil.RomanNumeralConversionRev.get(newLevel);
+
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = meta.getLore();
+
+        boolean foundEnchant = false;
+
+        if (lore == null) {
+            lore = new ArrayList<>(1);
+        } else {
+            for (int i = 0; i < lore.size(); i++) {
+                if (EnchantUtil.matchEnchant(lore.get(i), enchant.Name)) {
+                    lore.set(i, enchantLoreString);
+                    foundEnchant = true;
+
+                    break;
+                }
+            }
+        }
+
+        if (!foundEnchant) {
+            lore.add(enchantLoreString);
+        }
+
+        meta.setLore(lore);
+        item.setItemMeta(meta);
     }
 }
