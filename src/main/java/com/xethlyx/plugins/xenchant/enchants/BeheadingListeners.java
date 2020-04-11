@@ -19,6 +19,10 @@ public class BeheadingListeners implements Listener {
     @EventHandler
     public void onAnvilPrepare(PrepareAnvilEvent event) {
         ItemStack itemToChange = event.getInventory().getItem(0);
+        if (event.getResult() != null) {
+            itemToChange = event.getResult();
+        }
+
         ItemStack itemToAdd = event.getInventory().getItem(1);
 
         if (itemToChange == null || itemToAdd == null) return;
