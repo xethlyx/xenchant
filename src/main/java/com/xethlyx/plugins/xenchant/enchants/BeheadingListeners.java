@@ -46,7 +46,7 @@ public class BeheadingListeners implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().getType() != InventoryType.ANVIL) return;
-        if (event.getRawSlot() != event.getView().convertSlot(event.getRawSlot())) return;
+        //if (event.getRawSlot() != event.getView().convertSlot(event.getRawSlot())) return;
 
         ItemStack itemToChange = event.getInventory().getItem(0);
         ItemStack itemToAdd = event.getInventory().getItem(1);
