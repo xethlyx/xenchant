@@ -8,6 +8,8 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -40,6 +42,28 @@ public class BeheadingListeners implements Listener {
         event.getInventory().setRepairCost(5 * itemToAdd.getAmount());
         event.getInventory().setItem(2, result);
         event.setResult(result);
+    }
+
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event) {
+        if (event.getInventory().getType() != InventoryType.ANVIL) return;
+
+        ItemStack itemToChange = event.getInventory().getItem(0);
+        ItemStack itemToAdd = event.getInventory().getItem(1);
+
+        if (itemToChange == null || itemToAdd == null) return;
+        if (!EnchantUtil.verifyEnchantCompatibility("beheading", itemToChange)) return;
+        if (itemToAdd.getType() != Material.WITHER_SKELETON_SKULL) return;
+
+        int enchantLevel = EnchantUtil.parseEnchant("beheading", itemToChange);
+        enchantLevel += itemToAdd.getAmount();
+
+        if (enchantLevel > EnchantRegistry.getEnchant("beheading").MaxLevel) return;
+
+        ItemStack result = itemToChange.clone();
+        EnchantUtil.modifyEnchant(result, EnchantRegistry.getEnchant("beheading"), enchantLevel);
+
+        event.setCurrentItem(result);
     }
 
     @EventHandler
