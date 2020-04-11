@@ -40,6 +40,7 @@ public class EnchantUtil {
     }
 
     public static boolean matchEnchant(String matchString, String enchantName) {
+        console.log(ChatColor.GRAY + enchantName);
         return matchString.substring(0, enchantName.length() + 2).equals(ChatColor.GRAY + enchantName);
     }
 

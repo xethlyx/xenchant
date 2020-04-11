@@ -146,6 +146,8 @@ public class XEnchantCommand implements CommandExecutor {
                             break;
                         }
                     }
+
+                    sender.sendMessage(ChatColor.RED + "An internal error occurred: could not find lore.");
                 }
             }
         }
