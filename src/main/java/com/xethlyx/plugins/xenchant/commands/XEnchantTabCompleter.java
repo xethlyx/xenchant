@@ -15,7 +15,7 @@ public class XEnchantTabCompleter implements TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (!(command.getName().equalsIgnoreCase("xench") || command.getName().equalsIgnoreCase("xenchant"))) {
+        if (!(command.getName().equalsIgnoreCase("xench") || command.getName().equalsIgnoreCase("xenchant") || command.getName().equalsIgnoreCase("xenchant:xench") || command.getName().equalsIgnoreCase("xenchant:xenchant"))) {
             return null;
         }
 
