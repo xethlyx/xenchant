@@ -40,6 +40,7 @@ public class BeheadingListeners implements Listener {
             SkullMeta meta = (SkullMeta) skull.getItemMeta();
 
             meta.setOwningPlayer((OfflinePlayer) victim);
+            skull.setItemMeta(meta);
         } else if (victim instanceof Zombie) {
             skull = new ItemStack(Material.ZOMBIE_HEAD);
         } else if (victim instanceof WitherSkeleton) {
