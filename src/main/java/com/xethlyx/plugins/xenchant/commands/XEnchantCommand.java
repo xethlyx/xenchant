@@ -135,14 +135,12 @@ public class XEnchantCommand implements CommandExecutor {
                     newLore.add(enchantLoreString);
 
                     meta.setLore(newLore);
+                    item.setItemMeta(meta);
                 } else {
                     ItemMeta meta = item.getItemMeta();
                     List<String> lore = meta.getLore();
 
                     for (int i = 0; i < lore.size(); i++) {
-                        XEnchant.Instance.getLogger().info("Searching: " + lore.get(i));
-                        XEnchant.Instance.getLogger().info("Matching: " + enchant.Name);
-
                         if (EnchantUtil.matchEnchant(lore.get(i), enchant.Name)) {
                             lore.set(i, enchantLoreString);
 
@@ -150,7 +148,8 @@ public class XEnchantCommand implements CommandExecutor {
                         }
                     }
 
-                    sender.sendMessage(ChatColor.RED + "An internal error occurred: could not find lore.");
+                    meta.setLore(lore);
+                    item.setItemMeta(meta);
                 }
             }
         }
