@@ -123,11 +123,17 @@ public class XEnchantCommand implements CommandExecutor {
                     return true;
                 }
 
-
-
-                sender.sendMessage(ChatColor.GREEN + "Applying enchant " + args[0] + "..");
-
                 ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
+
+                if (Integer.parseInt(args[1]) == 0) {
+                    if (EnchantUtil.removeEnchant(item, EnchantRegistry.getEnchant(args[0]))) {
+                        sender.sendMessage(ChatColor.GOLD + "Removed enchant " + args[0] + "!");
+                    } else {
+                        sender.sendMessage(ChatColor.RED + "Could not find enchant " + args[0] + " on item!");
+                    }
+                } else {
+                    sender.sendMessage(ChatColor.GOLD + "Applying enchant " + args[0] + " " + EnchantUtil.RomanNumeralConversionRev.get(Integer.parseInt(args[1])) + "..");
+                }
 
                 // get enchantment line
 

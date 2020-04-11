@@ -69,7 +69,7 @@ public class EnchantUtil {
     }
 
     public static void modifyEnchant(ItemStack item, Enchant enchant, int newLevel) {
-        String enchantLoreString = ChatColor.GRAY + enchant.Name + " " + EnchantUtil.RomanNumeralConversionRev.get(newLevel);
+        String enchantLoreString = ChatColor.GRAY + enchant.Name + " " + RomanNumeralConversionRev.get(newLevel);
 
         ItemMeta meta = item.getItemMeta();
         List<String> lore = meta.getLore();
@@ -80,7 +80,7 @@ public class EnchantUtil {
             lore = new ArrayList<>(1);
         } else {
             for (int i = 0; i < lore.size(); i++) {
-                if (EnchantUtil.matchEnchant(lore.get(i), enchant.Name)) {
+                if (matchEnchant(lore.get(i), enchant.Name)) {
                     lore.set(i, enchantLoreString);
                     foundEnchant = true;
 
@@ -95,5 +95,24 @@ public class EnchantUtil {
 
         meta.setLore(lore);
         item.setItemMeta(meta);
+    }
+
+    public static boolean removeEnchant(ItemStack item, Enchant enchant) {
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = meta.getLore();
+
+        if (lore == null) {
+            return false;
+        }
+
+        for (int i = 0; i < lore.size(); i++) {
+            if (matchEnchant(lore.get(i), enchant.Name)) {
+                lore.remove(i);
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }
