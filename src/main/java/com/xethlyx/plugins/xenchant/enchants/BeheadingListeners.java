@@ -66,8 +66,9 @@ public class BeheadingListeners implements Listener {
         ItemStack result = itemToChange.clone();
         EnchantUtil.modifyEnchant(result, EnchantRegistry.getEnchant("beheading"), enchantLevel);
 
+        event.setCancelled(false);
         event.setResult(Event.Result.ALLOW);
-        //event.setCurrentItem(result);
+        event.setCurrentItem(result);
     }
 
     @EventHandler
