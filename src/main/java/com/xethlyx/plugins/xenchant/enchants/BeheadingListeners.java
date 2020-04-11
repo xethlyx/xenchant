@@ -1,6 +1,7 @@
 package com.xethlyx.plugins.xenchant.enchants;
 
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
+import com.xethlyx.plugins.xenchant.XEnchant;
 import com.xethlyx.plugins.xenchant.util.EnchantUtil;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -47,8 +48,11 @@ public class BeheadingListeners implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().getType() != InventoryType.ANVIL) return;
+        XEnchant.Instance.getLogger().info("Is anvil " + event.getSlot() + " " + event.getRawSlot());
         if (event.getRawSlot() != event.getView().convertSlot(event.getRawSlot())) return;
+        XEnchant.Instance.getLogger().info("Is in anvil at " + event.getRawSlot());
         if (event.getRawSlot() != 2) return;
+        XEnchant.Instance.getLogger().info("Is result");
 
         ItemStack itemToChange = event.getInventory().getItem(0);
         ItemStack itemToAdd = event.getInventory().getItem(1);
