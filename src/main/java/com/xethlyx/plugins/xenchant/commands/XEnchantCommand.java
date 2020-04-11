@@ -118,8 +118,13 @@ public class XEnchantCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (Integer.parseInt(args[1]) > 10) {
-                    sender.sendMessage(ChatColor.RED + "Max enchant level is 10!");
+                if (Integer.parseInt(args[1]) > enchant.MaxLevel) {
+                    sender.sendMessage(ChatColor.RED + "Max enchant level is " + enchant.MaxLevel + "!");
+                    return true;
+                }
+
+                if (!EnchantUtil.verifyEnchantCompatibility(enchant, ((Player) sender).getInventory().getItemInMainHand())) {
+                    sender.sendMessage(ChatColor.RED + "Your tool does not support " + enchant.MaxLevel + "!");
                     return true;
                 }
 
@@ -127,14 +132,14 @@ public class XEnchantCommand implements CommandExecutor {
 
                 if (Integer.parseInt(args[1]) == 0) {
                     if (EnchantUtil.removeEnchant(item, EnchantRegistry.getEnchant(args[0]))) {
-                        sender.sendMessage(ChatColor.GOLD + "Removed enchant " + args[0] + "!");
+                        sender.sendMessage(ChatColor.GOLD + "Removed enchant " + enchant.Name + "!");
                     } else {
-                        sender.sendMessage(ChatColor.RED + "Could not find enchant " + args[0] + " on item!");
+                        sender.sendMessage(ChatColor.RED + "Could not find enchant " + enchant.Name + " on item!");
                     }
 
                     return true;
                 } else {
-                    sender.sendMessage(ChatColor.GOLD + "Applying enchant " + args[0] + " " + EnchantUtil.RomanNumeralConversionRev.get(Integer.parseInt(args[1])) + "..");
+                    sender.sendMessage(ChatColor.GOLD + "Applying enchant " + enchant.Name + " " + EnchantUtil.RomanNumeralConversionRev.get(Integer.parseInt(args[1])) + "..");
                 }
 
                 // get enchantment line
