@@ -121,7 +121,7 @@ public class XEnchantCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (Integer.parseInt(args[2]) > 10) {
+                if (Integer.parseInt(args[1]) > 10) {
                     sender.sendMessage(ChatColor.RED + "Max enchant level is 10!");
                     return true;
                 }
