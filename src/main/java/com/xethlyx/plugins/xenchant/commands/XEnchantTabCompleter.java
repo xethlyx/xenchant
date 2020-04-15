@@ -38,23 +38,18 @@ public class XEnchantTabCompleter implements TabCompleter {
             }
 
             case 2: {
-                if (EnchantRegistry.getEnchant(args[0]) == null) {
+                Enchant completedEnchant = EnchantRegistry.getEnchant(args[0]);
+
+                if (completedEnchant == null) {
                     return new ArrayList<>();
                 }
 
                 List<String> availableEnchantLevels = new ArrayList<>();
 
-                availableEnchantLevels.add("0");
-                availableEnchantLevels.add("1");
-                availableEnchantLevels.add("2");
-                availableEnchantLevels.add("3");
-                availableEnchantLevels.add("4");
-                availableEnchantLevels.add("5");
-                availableEnchantLevels.add("6");
-                availableEnchantLevels.add("7");
-                availableEnchantLevels.add("8");
-                availableEnchantLevels.add("9");
-                availableEnchantLevels.add("10");
+                // Loop to max level
+                for (int i = 0; i <= completedEnchant.MaxLevel; i++) {
+                    availableEnchantLevels.add(Integer.toString(i));
+                }
 
                 return getMatchedAsType(args[1], availableEnchantLevels);
             }
