@@ -31,6 +31,7 @@ public class PropulsionListeners implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         if (event.getAction() != Action.LEFT_CLICK_AIR) return;
+        if (!event.getPlayer().isGliding()) return;
 
         int enchantLevel = EnchantUtil.parseEnchant("propulsion", event.getPlayer().getInventory().getChestplate());
 
