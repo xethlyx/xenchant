@@ -2,9 +2,11 @@ package com.xethlyx.plugins.xenchant.commands;
 
 import com.xethlyx.plugins.xenchant.Enchant;
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
@@ -27,8 +29,16 @@ public class XEnchantTabCompleter implements TabCompleter {
             case 1: {
                 List<String> availableEnchantsAndCommands = new ArrayList<>();
 
-                for (Map.Entry<String, Enchant<? extends Listener>> enchant : EnchantRegistry.EnchantList.entrySet()) {
-                    availableEnchantsAndCommands.add(enchant.getKey());
+                Material playerTool = ((Player) sender).getInventory().getItemInMainHand().getType();
+
+                for (Map.Entry<String, Enchant<? extends Listener>> enchantKey : EnchantRegistry.EnchantList.entrySet()) {
+                    Enchant<? extends Listener> enchant = enchantKey.getValue();
+
+                    for (Material allowedMaterial : enchant.AllowedItems) {
+                        if (allowedMaterial == playerTool) {
+                            availableEnchantsAndCommands.add(enchantKey.getKey());
+                        }
+                    }
                 }
 
                 availableEnchantsAndCommands.add("update");
