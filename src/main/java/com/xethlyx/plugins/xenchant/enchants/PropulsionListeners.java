@@ -20,7 +20,7 @@ public class PropulsionListeners implements Listener {
 
         if (entityChestplate.getType() == Material.ELYTRA) {
             if (EnchantUtil.parseEnchant("propulsion", entityChestplate) > 0) {
-                eventEntity.setVelocity(eventEntity.getLocation().getDirection().multiply(5));
+                eventEntity.setVelocity(eventEntity.getLocation().getDirection().multiply(1.5));
             }
         }
     }
