@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 public class PropulsionListeners implements Listener {
     @EventHandler
     public void onEntityToggleGlide(EntityToggleGlideEvent event) {
-        if (event.isGliding()) return;
+        if (!(event.isGliding())) return;
 
         if (!(event.getEntity() instanceof Player)) return;
         Player eventEntity = (Player) event.getEntity();
