@@ -3,6 +3,7 @@ package com.xethlyx.plugins.xenchant;
 import com.xethlyx.plugins.xenchant.commands.XEnchantCommand;
 import com.xethlyx.plugins.xenchant.commands.XEnchantTabCompleter;
 import com.xethlyx.plugins.xenchant.enchants.Beheading;
+import com.xethlyx.plugins.xenchant.enchants.Propulsion;
 import com.xethlyx.plugins.xenchant.enchants.Smelting;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,6 +25,7 @@ public class XEnchant extends JavaPlugin {
 
         new Beheading().registerEnchant();
         new Smelting().registerEnchant();
+        new Propulsion().registerEnchant();
 
         // Do other stuff
 
