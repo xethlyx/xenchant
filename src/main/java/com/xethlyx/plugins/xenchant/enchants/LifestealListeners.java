@@ -22,6 +22,7 @@ import java.util.Random;
 public class LifestealListeners implements Listener {
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        if (!(event.getEntity() instanceof LivingEntity)) return; //ignore hits on armor stands and such
         if (!(event.getDamager() instanceof Player)) return;
         Player damager = (Player)event.getDamager();
         
