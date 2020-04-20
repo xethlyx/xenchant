@@ -6,6 +6,7 @@ import com.xethlyx.plugins.xenchant.enchants.Beheading;
 import com.xethlyx.plugins.xenchant.enchants.Propulsion;
 import com.xethlyx.plugins.xenchant.enchants.Smelting;
 import com.xethlyx.plugins.xenchant.enchants.Lifesteal;
+import com.xethlyx.plugins.xenchant.enchants.Wither;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -28,6 +29,7 @@ public class XEnchant extends JavaPlugin {
         new Smelting().registerEnchant();
         new Propulsion().registerEnchant();
         new Lifesteal().registerEnchant();
+        new Wither().registerEnchant();
 
         // Do other stuff
 
