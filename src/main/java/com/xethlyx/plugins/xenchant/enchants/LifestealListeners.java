@@ -54,9 +54,9 @@ public class LifestealListeners implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        LivingEntity damager = (LivingEntity)event.getDamager();
+        Player damager = (Player)event.getDamager();
 
-        if (damager == NULL) {return;} //handle if someone shot a bow or something and they died before the arrow landed
+        if (damager == null) {return;}
         
         int enchantLevel = EnchantUtil.parseEnchant("lifesteal", damager.getInventory().getItemInMainHand());
 
