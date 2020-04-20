@@ -11,7 +11,7 @@ import java.util.List;
 public class Lifesteal extends EnchantRegister {
     @Override
     public void registerEnchant() {
-        Enchant lifestealEnchant = new Enchant<lifestealListeners>();
+        Enchant lifestealEnchant = new Enchant<LifestealListeners>();
 
         lifestealEnchant.Name = "Lifesteal";
         lifestealEnchant.Description = "A random percentage of the damage you deal to enemies is used to heal you.";
@@ -34,7 +34,7 @@ public class Lifesteal extends EnchantRegister {
 
         lifestealEnchant.AllowedItems = allowedItems;
 
-        lifestealEnchant.EnchantListener = new lifestealListeners();
+        lifestealEnchant.EnchantListener = new LifestealListeners();
 
         EnchantRegistry.registerEnchant("lifesteal", lifestealEnchant);
     }
