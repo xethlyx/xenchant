@@ -30,7 +30,7 @@ public class LifestealListeners implements Listener {
 
         if (enchantLevel < 1) return;
 
-        double newHealth = damager.getHealth() + event.getFinalDamage() * (new Random().nextFloat() * 0.15 * enchantLevel); //can be a value between 0-60% of the damage dealt on lifesteal 4
+        double newHealth = damager.getHealth() + event.getFinalDamage() * (new Random().nextFloat() * 0.1 * enchantLevel); //can be a value between 0-40% of the damage dealt on lifesteal 4
         
         if (newHealth > damager.getMaxHealth())
             newHealth = damager.getMaxHealth();
