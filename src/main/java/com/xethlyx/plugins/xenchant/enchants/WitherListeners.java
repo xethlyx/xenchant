@@ -19,20 +19,18 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.Random;
 
-public class LifestealListeners implements Listener {
+public class WitherListeners implements Listener {
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player)) return;
         Player damager = (Player)event.getDamager();
-        
-        int enchantLevel = EnchantUtil.parseEnchant("lifesteal", damager.getInventory().getItemInMainHand());
+        if (!(event.getEntity() instanceof LivingEntity)) return;
+        LivingEntity damaged = (LivingEntity)event.getEntity();
+        int enchantLevel = EnchantUtil.parseEnchant("wither", damager.getInventory().getItemInMainHand());
 
         if (enchantLevel < 1) return;
-
-        double newHealth = damager.getHealth() + event.getFinalDamage() * (new Random().nextFloat() * 0.15 * enchantLevel); //can be a value between 0-60% of the damage dealt on lifesteal 4
+        if ((new Random().nextFloat()) > (enchantLevel * 0.1)) return;
         
-        if (newHealth > damager.getMaxHealth())
-            newHeatlh = damager.getMaxHealth();
-        damager.setHealth(newHealth);
+        damaged.addPotionEffect(PotionEffect(PotionEffectType.WITHER, new Random().nextFloat() * 2 + 4, enchantLevel)); //random length between 4 and 6 seconds
     }
 }
