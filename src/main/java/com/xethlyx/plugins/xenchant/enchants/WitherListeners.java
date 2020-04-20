@@ -33,6 +33,6 @@ public class WitherListeners implements Listener {
         if (enchantLevel < 1) return;
         if ((new Random().nextFloat()) > (enchantLevel * 0.1)) return;
         
-        damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, new Random().nextInt(2) + 4, enchantLevel)); //random length between 4 and 6 seconds
+        damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, new Random().nextInt(20*2) + (4*20), enchantLevel)); //random length between 4 and 6 seconds
     }
 }
