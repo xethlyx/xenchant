@@ -56,6 +56,8 @@ public class EnchantUtil {
     }
 
     public static boolean matchEnchant(String matchString, String enchantName) {
+        if (matchString.length() < (enchantName.length() + 2)) return false;
+        
         return matchString.substring(0, enchantName.length() + 2).equals(ChatColor.GRAY + enchantName);
     }
 
