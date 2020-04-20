@@ -54,20 +54,17 @@ public class LifestealListeners implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player)) {return;}
+        if (!(event.getDamager() instanceof Player)) return;
         Player damager = (Player)event.getDamager();
         
         int enchantLevel = EnchantUtil.parseEnchant("lifesteal", damager.getInventory().getItemInMainHand());
 
-        if (enchantLevel < 1) {
-            return;
-        }
+        if (enchantLevel < 1) return;
 
         double amountToHeal = event.getFinalDamage() * (new Random().nextFloat() * 0.15 * enchantLevel); //can be a value between 0-60% of the damage dealt on lifesteal 4
         
-        if (amountToHeal > damager.getMaxHealth()) {
+        if (amountToHeal > damager.getMaxHealth())
             amountToHeal = damager.getMaxHealth();
-        }
         damager.setHealth(damager.getHealth() + amountToHeal);
     }
 }
