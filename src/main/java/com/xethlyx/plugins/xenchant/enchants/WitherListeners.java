@@ -16,6 +16,7 @@ import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Random;
@@ -32,6 +33,6 @@ public class WitherListeners implements Listener {
         if (enchantLevel < 1) return;
         if ((new Random().nextFloat()) > (enchantLevel * 0.1)) return;
         
-        damaged.addPotionEffect(PotionEffect(PotionEffectType.WITHER, new Random().nextFloat() * 2 + 4, enchantLevel)); //random length between 4 and 6 seconds
+        damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, new Random().nextFloat() * 2 + 4, enchantLevel)); //random length between 4 and 6 seconds
     }
 }
