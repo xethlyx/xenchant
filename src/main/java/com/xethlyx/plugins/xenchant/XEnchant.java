@@ -26,6 +26,7 @@ public class XEnchant extends JavaPlugin {
         new Beheading().registerEnchant();
         new Smelting().registerEnchant();
         new Propulsion().registerEnchant();
+        new Lifesteal().registerEnchant();
 
         // Do other stuff
 
