@@ -15,6 +15,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.Random;
 
@@ -55,9 +56,9 @@ public class LifestealListeners implements Listener {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         LivingEntity damager = (LivingEntity)event.getDamager();
 
-        if (!damager) {return;} //handle if someone shot a bow or something and they died before the arrow landed
+        if (damager == NULL) {return;} //handle if someone shot a bow or something and they died before the arrow landed
         
-        int enchantLevel = EnchantUtil.parseEnchant("lifesteal", killer.getInventory().getItemInMainHand());
+        int enchantLevel = EnchantUtil.parseEnchant("lifesteal", damager.getInventory().getItemInMainHand());
 
         if (enchantLevel < 1) {
             return;
