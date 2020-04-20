@@ -53,8 +53,10 @@ public class LifestealListeners implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        Entity damager = event.getDamager();
+        LivingEntity damager = (LivingEntity)event.getDamager();
 
+        if (!damager) {return;} //handle if someone shot a bow or something and they died before the arrow landed
+        
         int enchantLevel = EnchantUtil.parseEnchant("lifesteal", killer.getInventory().getItemInMainHand());
 
         if (enchantLevel < 1) {
@@ -63,6 +65,7 @@ public class LifestealListeners implements Listener {
 
         double amountToHeal = event.getFinalDamage() * (new Random().nextFloat() * 0.15 * enchantLevel); //can be a value between 0-60% of the damage dealt on lifesteal 4
         
-        EntityRegainHealthEvent(damager, amountToHeal, EntityRegainHealthEvent::CAUSE_CUSTOM);
+        //EntityRegainHealthEvent(damager, amountToHeal, EntityRegainHealthEvent::CAUSE_CUSTOM);
+        damager.setHealth(damager.getHealth() + amountToHeal);
     }
 }
