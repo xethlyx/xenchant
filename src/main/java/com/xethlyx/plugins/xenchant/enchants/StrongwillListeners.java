@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
-public class LifestealListeners implements Listener {
+public class StrongwillListeners implements Listener {
     @EventHandler
     public void onPlayerInteractAtEntity(PlayerInteractAtEntityEvent event) {
       Player user = event.getPlayer();
