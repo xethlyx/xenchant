@@ -2,12 +2,7 @@ package com.xethlyx.plugins.xenchant;
 
 import com.xethlyx.plugins.xenchant.commands.XEnchantCommand;
 import com.xethlyx.plugins.xenchant.commands.XEnchantTabCompleter;
-import com.xethlyx.plugins.xenchant.enchants.Beheading;
-import com.xethlyx.plugins.xenchant.enchants.Propulsion;
-import com.xethlyx.plugins.xenchant.enchants.Smelting;
-import com.xethlyx.plugins.xenchant.enchants.Lifesteal;
-import com.xethlyx.plugins.xenchant.enchants.Wither;
-import com.xethlyx.plugins.xenchant.enchants.Strongwill;
+import com.xethlyx.plugins.xenchant.enchants.*;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -31,7 +26,6 @@ public class XEnchant extends JavaPlugin {
         new Propulsion().registerEnchant();
         new Lifesteal().registerEnchant();
         new Wither().registerEnchant();
-        new Strongwill().registerEnchant();
 
         // Do other stuff
 

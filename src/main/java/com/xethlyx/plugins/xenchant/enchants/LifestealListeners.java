@@ -15,7 +15,7 @@ public class LifestealListeners implements Listener {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof LivingEntity)) return; //ignore hits on armor stands and such
         if (!(event.getDamager() instanceof Player)) return;
-        
+
         Player damager = (Player)event.getDamager();
         
         int enchantLevel = EnchantUtil.parseEnchant("lifesteal", damager.getInventory().getItemInMainHand());
