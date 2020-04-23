@@ -4,7 +4,8 @@ pipeline {
     stage('Build') {
       agent any
       steps {
-        withGradle()
+        sh '''chmod o+x ./gradlew
+./gradlew build'''
       }
     }
 
