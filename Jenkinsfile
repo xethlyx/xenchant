@@ -6,12 +6,7 @@ pipeline {
       steps {
         sh '''chmod o+x ./gradlew
 ./gradlew build'''
-      }
-    }
-
-    stage('Archive the Artifacts') {
-      steps {
-        archiveArtifacts './build/libs/*.jar'
+        archiveArtifacts 'build/libs/*'
       }
     }
 
