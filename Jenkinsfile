@@ -4,9 +4,12 @@ pipeline {
     stage('Build') {
       agent any
       steps {
-        sh '''chmod o+x ./gradlew
+        catchError() {
+          sh '''chmod o+x ./gradlew
 ./gradlew build'''
-        archiveArtifacts 'build/libs/*'
+          archiveArtifacts 'build/libs/*'
+        }
+
       }
     }
 
