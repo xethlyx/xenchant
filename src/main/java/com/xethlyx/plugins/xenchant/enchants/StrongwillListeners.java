@@ -18,7 +18,8 @@ public class StrongwillListeners implements Listener {
     @EventHandler
     public void onPlayerInteractAtEntity(PlayerInteractAtEntityEvent event) {
       Player user = event.getPlayer();
-      Entity target = event.clickedEntity; //not a method; clickedEntity is a field
+      if (!(event.clickedEntity instanceof LivingEntity)) return;
+      LivingEntity target = (LivingEntity)event.clickedEntity; //not a method; clickedEntity is a field
       if (EnchantUtil.parseEnchant("strongwill", user.getInventory().getHelmet()) == 0) return;
       ItemStack mainHand = user.getItemInMainHand();
       if (mainHand.getType() != Material.LEAD) return;
