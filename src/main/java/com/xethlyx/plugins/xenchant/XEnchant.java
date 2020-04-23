@@ -31,7 +31,7 @@ public class XEnchant extends JavaPlugin {
         new Propulsion().registerEnchant();
         new Lifesteal().registerEnchant();
         new Wither().registerEnchant();
-        new Strongwill().registerEnchant;
+        new Strongwill().registerEnchant();
 
         // Do other stuff
 
