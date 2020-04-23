@@ -22,7 +22,7 @@ public class StrongwillListeners implements Listener {
       if (EnchantUtil.parseEnchant("strongwill", user.getInventory().getHelmet()) == 0) return;
       ItemStack mainHand = user.getItemInMainHand();
       if (mainHand.getType() != Material.LEAD) return;
-      if (!user.setLeashHolder(target)) return; //check for success
+      if (!target.setLeashHolder(user)) return; //check for success
       mainHand.setAmount(mainHand.getAmount() - 1); //take a lead
     }
 }
