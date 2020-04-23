@@ -11,7 +11,7 @@ pipeline {
 
     stage('Archive the Artifacts') {
       steps {
-        archiveArtifacts 'build/libs/*.jar'
+        archiveArtifacts './build/libs/*.jar'
       }
     }
 
