@@ -1,20 +1,11 @@
 package com.xethlyx.plugins.xenchant.enchants;
 
-import com.xethlyx.plugins.xenchant.EnchantRegistry;
-import com.xethlyx.plugins.xenchant.XEnchant;
 import com.xethlyx.plugins.xenchant.util.EnchantUtil;
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.*;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.inventory.PrepareAnvilEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.Random;
@@ -24,6 +15,7 @@ public class LifestealListeners implements Listener {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof LivingEntity)) return; //ignore hits on armor stands and such
         if (!(event.getDamager() instanceof Player)) return;
+        
         Player damager = (Player)event.getDamager();
         
         int enchantLevel = EnchantUtil.parseEnchant("lifesteal", damager.getInventory().getItemInMainHand());
@@ -32,8 +24,8 @@ public class LifestealListeners implements Listener {
 
         double newHealth = damager.getHealth() + event.getFinalDamage() * (new Random().nextFloat() * 0.1 * enchantLevel); //can be a value between 0-40% of the damage dealt on lifesteal 4
         
-        if (newHealth > damager.getMaxHealth())
-            newHealth = damager.getMaxHealth();
+        if (newHealth > damager.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+            newHealth = damager.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         damager.setHealth(newHealth);
     }
 }

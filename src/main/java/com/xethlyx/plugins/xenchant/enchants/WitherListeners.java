@@ -17,11 +17,12 @@ public class WitherListeners implements Listener {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player)) return;
         if (event.getCause() == DamageCause.THORNS) return;
+
         Player damager = (Player)event.getDamager();
+
         if (!(event.getEntity() instanceof LivingEntity)) return;
         if (event.isCancelled()) return;
 
-        Player damager = (Player) event.getDamager();
         LivingEntity damaged = (LivingEntity) event.getEntity();
 
         int enchantLevel = EnchantUtil.parseEnchant("wither", damager.getInventory().getItemInMainHand());
