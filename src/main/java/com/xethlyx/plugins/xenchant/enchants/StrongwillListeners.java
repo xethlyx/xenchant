@@ -53,7 +53,7 @@ public class StrongwillListeners implements Listener {
                     dummy.setVelocity(playerVelocity); //apply forces from player movement
                     //note that this will create a 1 game tick delay for movement
                 }
-            }
+            };
             task = runnable.runTaskTimer(this.plugin, 0, 1);
         }
         mainHand.setAmount(mainHand.getAmount() - 1); //take a lead
