@@ -18,6 +18,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler;
 
 public class StrongwillListeners implements Listener {
     public void onPlayerInteractAtEntity(PlayerInteractAtEntityEvent event) {
@@ -38,8 +39,8 @@ public class StrongwillListeners implements Listener {
             BukkitRunnable runnable = new BukkitRunnable() {
                 @Override
                 public void run() { 
-                    if (!dummy.isLeashed() || !target.isOnline() || !user.isOnline()) { //if the player broke out of leash, or if the leash should not exist
-                        if (target.isOnline() && user.isOnline() && !target.hasPermission("xethlyx.FREE")) {
+                    if (!dummy.isLeashed() || !((Player)target).isOnline() || !user.isOnline()) { //if the player broke out of leash, or if the leash should not exist
+                        if (((Player)target).isOnline() && user.isOnline() && !target.hasPermission("xethlyx.FREE")) {
                             target.teleport(dummy);
                             dummy.setLeashHolder(user);
                         }
@@ -54,7 +55,7 @@ public class StrongwillListeners implements Listener {
                     //note that this will create a 1 game tick delay for movement
                 }
             };
-            task = runnable.runTaskTimer(this.plugin, 0, 1);
+            task = runnable.runTaskTimer(XEnchant, 0, 1);
         }
         mainHand.setAmount(mainHand.getAmount() - 1); //take a lead
     }
