@@ -36,20 +36,23 @@ public class StrongwillListeners implements Listener {
             dummy.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 2 ^ 31, 1, false, false));
             BukkitTask task;
             BukkitRunnable runnable = new BukkitRunnable() {
-                if (!dummy.isLeashed() || !target.isOnline() || !user.isOnline()) { //if the player broke out of leash, or if the leash should not exist
-                    if (target.isOnline() && user.isOnline() && !target.hasPermission("xethlyx.FREE")) {
-                        target.teleport(dummy);
-                        dummy.setLeashHolder(user);
+                @Override
+                public void run() { 
+                    if (!dummy.isLeashed() || !target.isOnline() || !user.isOnline()) { //if the player broke out of leash, or if the leash should not exist
+                        if (target.isOnline() && user.isOnline() && !target.hasPermission("xethlyx.FREE")) {
+                            target.teleport(dummy);
+                            dummy.setLeashHolder(user);
+                        }
+                        dummy.setHealth(0);
+                        task.cancel();
+                        return;
                     }
-                    dummy.setHealth(0);
-                    task.cancel();
-                    return;
+                    dummy.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 10, 1, false, false));
+                    Vector playerVelocity = user.getVelocity();
+                    user.setVelocity(dummy.getVelocity()); //apply force from restraints
+                    dummy.setVelocity(playerVelocity); //apply forces from player movement
+                    //note that this will create a 1 game tick delay for movement
                 }
-                dummy.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 10, 1, false, false));
-                Vector playerVelocity = user.getVelocity();
-                user.setVelocity(dummy.getVelocity()); //apply force from restraints
-                dummy.setVelocity(playerVelocity); //apply forces from player movement
-                //note that this will create a 1 game tick delay for movement
             }
             task = runnable.runTaskTimer(this.plugin, 0, 1);
         }
