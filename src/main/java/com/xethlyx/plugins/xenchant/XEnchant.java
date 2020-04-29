@@ -26,7 +26,8 @@ public class XEnchant extends JavaPlugin {
         new Propulsion().registerEnchant();
         new Lifesteal().registerEnchant();
         new Wither().registerEnchant();
-
+        new Strongwill().registerEnchant();
+        
         // Do other stuff
 
         getLogger().info("There are currently " + EnchantRegistry.EnchantList.size() + " enchant(s) registered and pending initialization.");
