@@ -62,14 +62,12 @@ public class EnchantUtil {
     }
 
     public static int parseEnchant(Enchant enchant, ItemStack item) {
-        if (item.getItemMeta() == null) {
-            return 0;
-        }
+        if (item == null) return 0;
+
+        if (item.getItemMeta() == null) return 0;
 
         List<String> itemLore = item.getItemMeta().getLore();
-        if (itemLore == null) {
-            return 0;
-        }
+        if (itemLore == null) return 0;
 
         for (String lore : itemLore) {
             if (enchant.Name.length() > lore.length()) {
