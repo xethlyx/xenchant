@@ -24,7 +24,7 @@ public class InsomniacListeners implements Listener {
         }
 
         // Phantom target player
-        Player player = (Player) event.getEntity();
+        Player player = (Player) event.getTarget();
         LivingEntity entity =  (LivingEntity) event.getEntity();
 
         XEnchant.Instance.getLogger().info("Passed checks");
