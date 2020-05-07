@@ -27,6 +27,7 @@ public class XEnchant extends JavaPlugin {
         new Lifesteal().registerEnchant();
         new Wither().registerEnchant();
         new Strongwill().registerEnchant();
+        new Lifesteal().registerEnchant();
         
         // Do other stuff
 
