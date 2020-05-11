@@ -37,6 +37,10 @@ public class PropulsionListeners implements Listener {
 
         if (enchantLevel < 2) return;
 
-        event.getPlayer().setVelocity(event.getPlayer().getLocation().getDirection());
+        int extraMult = 1;
+
+        if (enchantLevel == 3) extraMult *= 2;
+
+        event.getPlayer().setVelocity(event.getPlayer().getLocation().getDirection().multiply(extraMult));
     }
 }

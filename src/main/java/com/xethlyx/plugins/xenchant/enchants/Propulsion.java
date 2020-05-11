@@ -16,7 +16,7 @@ public class Propulsion extends EnchantRegister {
         propulsionEnchant.Name = "Propulsion";
         propulsionEnchant.Description = "An enchantment that allows you to lift off using an elytra.";
 
-        propulsionEnchant.MaxLevel = 2;
+        propulsionEnchant.MaxLevel = 3;
 
         List<Material> allowedItems = new ArrayList<>();
         allowedItems.add(Material.ELYTRA);
