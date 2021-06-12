@@ -31,7 +31,7 @@ dependencies {
 
 spigot {
     name = 'XEnchant'
-    version = versionNumber + '-' + System.getenv('BUILD_NUMBER')
+    version = versionNumber
     authors = ['github.com/xethlyx']
     apiVersion = '1.17'
     load = STARTUP
