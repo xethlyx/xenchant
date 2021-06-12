@@ -57,11 +57,11 @@ public class EnchantUtil {
 
     public static boolean matchEnchant(String matchString, String enchantName) {
         if (matchString.length() < (enchantName.length() + 2)) return false;
-        
+
         return matchString.substring(0, enchantName.length() + 2).equals(ChatColor.GRAY + enchantName);
     }
 
-    public static int parseEnchant(Enchant enchant, ItemStack item) {
+    public static <T extends Listener> int parseEnchant(Enchant<T> enchant, ItemStack item) {
         if (item == null) return 0;
 
         if (item.getItemMeta() == null) return 0;
@@ -82,7 +82,7 @@ public class EnchantUtil {
         return 0;
     }
 
-    public static void modifyEnchant(ItemStack item, Enchant enchant, int newLevel) {
+    public static <T extends Listener> void modifyEnchant(ItemStack item, Enchant<T> enchant, int newLevel) {
         String enchantLoreString = ChatColor.GRAY + enchant.Name + " " + RomanNumeralConversionRev.get(newLevel);
 
         ItemMeta meta = item.getItemMeta();
@@ -111,7 +111,7 @@ public class EnchantUtil {
         item.setItemMeta(meta);
     }
 
-    public static boolean removeEnchant(ItemStack item, Enchant enchant) {
+    public static <T extends Listener> boolean removeEnchant(ItemStack item, Enchant<T> enchant) {
         ItemMeta meta = item.getItemMeta();
         List<String> lore = meta.getLore();
 

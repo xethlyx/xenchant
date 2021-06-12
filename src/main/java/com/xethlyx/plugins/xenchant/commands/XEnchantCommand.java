@@ -67,6 +67,8 @@ public class XEnchantCommand implements CommandExecutor {
         while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
             fileOutputStream.write(dataBuffer, 0, bytesRead);
         }
+
+        fileOutputStream.close();
     }
 
     @Override

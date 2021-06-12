@@ -11,7 +11,7 @@ import java.util.List;
 public class Strongwill extends EnchantRegister {
     @Override
     public void registerEnchant() {
-        Enchant strongwillEnchant = new Enchant<StrongwillListeners>();
+        Enchant<StrongwillListeners> strongwillEnchant = new Enchant<StrongwillListeners>();
 
         strongwillEnchant.Name = "Strong Will";
         strongwillEnchant.Description = "Right click any mob with a lead to attach it.";

@@ -11,7 +11,7 @@ import java.util.List;
 public class Beheading extends EnchantRegister {
     @Override
     public void registerEnchant() {
-        Enchant beheadingEnchant = new Enchant<BeheadingListeners>();
+        Enchant<BeheadingListeners> beheadingEnchant = new Enchant<BeheadingListeners>();
 
         beheadingEnchant.Name = "Beheading";
         beheadingEnchant.Description = "An enchantment that allows you to collect the skulls of victims when they die.";
