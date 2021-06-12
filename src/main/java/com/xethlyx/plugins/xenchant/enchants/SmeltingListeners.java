@@ -15,6 +15,10 @@ public class SmeltingListeners implements Listener {
         put(Material.IRON_ORE, Material.IRON_INGOT);
         put(Material.GOLD_ORE, Material.GOLD_INGOT);
         put(Material.COPPER_ORE, Material.COPPER_INGOT);
+
+        put(Material.DEEPSLATE_IRON_ORE, Material.IRON_INGOT);
+        put(Material.DEEPSLATE_GOLD_ORE, Material.GOLD_INGOT);
+        put(Material.DEEPSLATE_COPPER_ORE, Material.COPPER_INGOT);
     }};
 
     @EventHandler
