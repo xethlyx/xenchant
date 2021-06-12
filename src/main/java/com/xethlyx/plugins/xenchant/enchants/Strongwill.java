@@ -19,6 +19,7 @@ public class Strongwill extends EnchantRegister {
         strongwillEnchant.MaxLevel = 1;
 
         List<Material> allowedItems = new ArrayList<>();
+        allowedItems.add(Material.NETHERITE_HELMET);
         allowedItems.add(Material.DIAMOND_HELMET);
         allowedItems.add(Material.IRON_HELMET);
         allowedItems.add(Material.GOLDEN_HELMET);

@@ -20,6 +20,7 @@ public class Smelting extends EnchantRegister {
 
         List<Material> allowedItems = new ArrayList<>();
 
+        allowedItems.add(Material.NETHERITE_PICKAXE);
         allowedItems.add(Material.DIAMOND_PICKAXE);
         allowedItems.add(Material.IRON_PICKAXE);
         allowedItems.add(Material.GOLDEN_PICKAXE);
