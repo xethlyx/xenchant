@@ -57,7 +57,6 @@ public class SoulboundListeners implements Listener {
         ArrayList<ItemData> soulboundItems = soulbound.get(player.getUniqueId());
 
         for (ItemData itemData : soulboundItems) {
-            System.out.println("soulbound restore");
             playerInventory.setItem(itemData.location, itemData.item);
         }
 
