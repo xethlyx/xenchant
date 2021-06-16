@@ -153,9 +153,11 @@ public class MeridianListeners extends BukkitRunnable implements Listener {
             }
 
             List<LivingEntity> currentTargetingEntities = targetingEntities.get(player);
+            if (currentTargetingEntities == null) continue;
             currentTargetingEntities.removeIf(Entity::isDead);
 
             AttributeInstance damage = player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
+            if (damage == null) continue;
             double attackDamage = damage.getValue();
 
             for (Entity entity : meridian.getNearbyEntities(2, 2, 2)) {
@@ -171,7 +173,7 @@ public class MeridianListeners extends BukkitRunnable implements Listener {
 
                 Location restingPosition = player.getEyeLocation().add(0, 1, 0);
                 meridian.teleport(lerp(meridian.getLocation(), restingPosition, accelerationSpeed));
-                return;
+                continue;
             }
 
             LivingEntity currentTarget = currentTargetingEntities.get(0);
