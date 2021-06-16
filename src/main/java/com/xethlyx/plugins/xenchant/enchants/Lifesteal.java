@@ -27,7 +27,7 @@ public class Lifesteal extends EnchantRegister {
         allowedItems.add(Material.STONE_SWORD);
         allowedItems.add(Material.WOODEN_SWORD);
 
-        allowedItems.add(Material.NETHERITE_SWORD);
+        allowedItems.add(Material.NETHERITE_AXE);
         allowedItems.add(Material.DIAMOND_AXE);
         allowedItems.add(Material.IRON_AXE);
         allowedItems.add(Material.GOLDEN_AXE);
