@@ -44,6 +44,8 @@ public class EnchantUtil {
     }
 
     public static boolean verifyEnchantCompatibility(Enchant<? extends Listener> enchant, ItemStack item) {
+        if (enchant.AllowedItems == null) return true;
+
         for (Material material : enchant.AllowedItems) {
             if (material == item.getType()) return true;
         }

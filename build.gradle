@@ -56,3 +56,17 @@ spigot {
         }
     }
 }
+
+task devBuild {
+    group "dev"
+    description "Build and then load onto dev server"
+    doLast {
+        copy {
+            from 'build/libs'
+            into 'server/plugins'
+            include '*.jar'
+        }
+    }
+}
+
+devBuild.dependsOn jar

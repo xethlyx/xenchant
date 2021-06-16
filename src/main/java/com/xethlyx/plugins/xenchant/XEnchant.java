@@ -29,6 +29,8 @@ public class XEnchant extends JavaPlugin {
         new Strongwill().registerEnchant();
         new Lifesteal().registerEnchant();
         new Insomniac().registerEnchant();
+        new Meridian().registerEnchant();
+        new Soulbound().registerEnchant();
         
         // Do other stuff
 

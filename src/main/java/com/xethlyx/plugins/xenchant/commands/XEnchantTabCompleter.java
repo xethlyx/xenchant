@@ -34,9 +34,13 @@ public class XEnchantTabCompleter implements TabCompleter {
                 for (Map.Entry<String, Enchant<? extends Listener>> enchantKey : EnchantRegistry.EnchantList.entrySet()) {
                     Enchant<? extends Listener> enchant = enchantKey.getValue();
 
-                    for (Material allowedMaterial : enchant.AllowedItems) {
-                        if (allowedMaterial == playerTool) {
-                            availableEnchantsAndCommands.add(enchantKey.getKey());
+                    if (enchant.AllowedItems == null) {
+                        availableEnchantsAndCommands.add(enchantKey.getKey());
+                    } else {
+                        for (Material allowedMaterial : enchant.AllowedItems) {
+                            if (allowedMaterial == playerTool) {
+                                availableEnchantsAndCommands.add(enchantKey.getKey());
+                            }
                         }
                     }
                 }

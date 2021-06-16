@@ -8,6 +8,7 @@ import com.xethlyx.plugins.xenchant.EnchantRegistry;
 import com.xethlyx.plugins.xenchant.XEnchant;
 import com.xethlyx.plugins.xenchant.util.EnchantUtil;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -131,6 +132,11 @@ public class XEnchantCommand implements CommandExecutor {
                 }
 
                 ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
+
+                if (item.getType() == Material.AIR) {
+                    sender.sendMessage(ChatColor.RED + "Cannot modify enchants of AIR!");
+                    return true;
+                }
 
                 if (Integer.parseInt(args[1]) == 0) {
                     if (EnchantUtil.removeEnchant(item, EnchantRegistry.getEnchant(args[0]))) {
