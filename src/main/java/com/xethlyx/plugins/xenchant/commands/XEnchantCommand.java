@@ -127,13 +127,21 @@ public class XEnchantCommand implements CommandExecutor {
                     return true;
                 }
 
-                Player targetPlayer = (Player) sender;
+                Player targetPlayer = null;
+
                 if (args.length >= 3) {
                     targetPlayer = XEnchant.Instance.getServer().getPlayer(args[2]);
                     if (targetPlayer == null) {
                         sender.sendMessage(ChatColor.RED + "Player " + args[2] + " not found.");
                         return true;
                     }
+                } else if (sender instanceof Player) {
+                    targetPlayer = (Player) sender;
+                }
+
+                if (targetPlayer == null) {
+                    sender.sendMessage(ChatColor.RED + "Console must specify player");
+                    return true;
                 }
 
                 PlayerInventory targetInventory = targetPlayer.getInventory();
