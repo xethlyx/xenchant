@@ -11,7 +11,7 @@ import java.util.List;
 public class Smelting extends EnchantRegister {
     @Override
     public void registerEnchant() {
-        Enchant<SmeltingListeners> smeltingEnchant = new Enchant<SmeltingListeners>();
+        Enchant<SmeltingListeners> smeltingEnchant = new Enchant<>();
 
         smeltingEnchant.Name = "Smelting";
         smeltingEnchant.Description = "Any ores when mined will be automatically smelted.";

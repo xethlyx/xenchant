@@ -11,7 +11,7 @@ import java.util.List;
 public class Insomniac extends EnchantRegister {
     @Override
     public void registerEnchant() {
-        Enchant<InsomniacListeners> insomniacEnchant = new Enchant<InsomniacListeners>();
+        Enchant<InsomniacListeners> insomniacEnchant = new Enchant<>();
 
         insomniacEnchant.Name = "Insomniac";
         insomniacEnchant.Description = "An enchantment that makes phantoms less annoying.";

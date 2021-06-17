@@ -11,7 +11,7 @@ import java.util.List;
 public class Wither extends EnchantRegister {
     @Override
     public void registerEnchant() {
-        Enchant<WitherListeners> witherEnchant = new Enchant<WitherListeners>();
+        Enchant<WitherListeners> witherEnchant = new Enchant<>();
 
         witherEnchant.Name = "Wither";
         witherEnchant.Description = "Your enemies will sometimes get the wither effect.";

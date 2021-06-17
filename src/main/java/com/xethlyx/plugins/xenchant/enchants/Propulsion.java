@@ -11,7 +11,7 @@ import java.util.List;
 public class Propulsion extends EnchantRegister {
     @Override
     public void registerEnchant() {
-        Enchant<PropulsionListeners> propulsionEnchant = new Enchant<PropulsionListeners>();
+        Enchant<PropulsionListeners> propulsionEnchant = new Enchant<>();
 
         propulsionEnchant.Name = "Propulsion";
         propulsionEnchant.Description = "An enchantment that allows you to lift off using an elytra.";

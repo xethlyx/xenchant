@@ -3,6 +3,7 @@ package com.xethlyx.plugins.xenchant;
 import com.xethlyx.plugins.xenchant.commands.XEnchantCommand;
 import com.xethlyx.plugins.xenchant.commands.XEnchantTabCompleter;
 import com.xethlyx.plugins.xenchant.enchants.*;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,8 +19,12 @@ public class XEnchant extends JavaPlugin {
         saveDefaultConfig();
 
         getLogger().info("Starting initialization of enchants..");
-        this.getCommand("xenchant").setExecutor(new XEnchantCommand());
-        this.getCommand("xenchant").setTabCompleter(new XEnchantTabCompleter());
+
+        PluginCommand xenchantCommand = this.getCommand("xenchant");
+        assert xenchantCommand != null;
+
+        xenchantCommand.setExecutor(new XEnchantCommand());
+        xenchantCommand.setTabCompleter(new XEnchantTabCompleter());
 
         // Register Enchants
 
