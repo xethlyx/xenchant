@@ -3,6 +3,7 @@ package com.xethlyx.plugins.xenchant;
 import com.xethlyx.plugins.xenchant.commands.XEnchantCommand;
 import com.xethlyx.plugins.xenchant.commands.XEnchantTabCompleter;
 import com.xethlyx.plugins.xenchant.enchants.*;
+import com.xethlyx.plugins.xenchant.util.EnchantListener;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -41,6 +42,8 @@ public class XEnchant extends JavaPlugin {
         new Zenith().registerEnchant();
         
         // Do other stuff
+
+        getServer().getPluginManager().registerEvents(new EnchantListener(), this);
 
         getLogger().info("There are currently " + EnchantRegistry.EnchantList.size() + " enchant(s) registered and pending initialization.");
 

@@ -147,7 +147,7 @@ public class XEnchantCommand implements CommandExecutor {
                 PlayerInventory targetInventory = targetPlayer.getInventory();
                 ItemStack item = targetInventory.getItemInMainHand();
 
-                if (!EnchantUtil.verifyEnchantCompatibility(enchant, item)) {
+                if (item.getType() != Material.ENCHANTED_BOOK && !EnchantUtil.verifyEnchantCompatibility(enchant, item)) {
                     sender.sendMessage(ChatColor.RED + "Your tool does not support " + enchant.Name + "!");
                     return true;
                 }

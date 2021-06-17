@@ -37,10 +37,8 @@ public class XEnchantTabCompleter implements TabCompleter {
                     if (enchant.AllowedItems == null) {
                         availableEnchantsAndCommands.add(enchantKey.getKey());
                     } else {
-                        for (Material allowedMaterial : enchant.AllowedItems) {
-                            if (allowedMaterial == playerTool) {
-                                availableEnchantsAndCommands.add(enchantKey.getKey());
-                            }
+                        if (enchant.AllowedItems.contains(playerTool) || playerTool == Material.ENCHANTED_BOOK) {
+                            availableEnchantsAndCommands.add(enchantKey.getKey());
                         }
                     }
                 }
