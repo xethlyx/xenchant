@@ -14,6 +14,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
@@ -126,12 +127,22 @@ public class XEnchantCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (!EnchantUtil.verifyEnchantCompatibility(enchant, ((Player) sender).getInventory().getItemInMainHand())) {
+                Player targetPlayer = (Player) sender;
+                if (args.length >= 3) {
+                    targetPlayer = XEnchant.Instance.getServer().getPlayer(args[2]);
+                    if (targetPlayer == null) {
+                        sender.sendMessage(ChatColor.RED + "Player " + args[2] + " not found.");
+                        return true;
+                    }
+                }
+
+                PlayerInventory targetInventory = targetPlayer.getInventory();
+                ItemStack item = targetInventory.getItemInMainHand();
+
+                if (!EnchantUtil.verifyEnchantCompatibility(enchant, item)) {
                     sender.sendMessage(ChatColor.RED + "Your tool does not support " + enchant.Name + "!");
                     return true;
                 }
-
-                ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
 
                 if (item.getType() == Material.AIR) {
                     sender.sendMessage(ChatColor.RED + "Cannot modify enchants of AIR!");
