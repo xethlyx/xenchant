@@ -88,6 +88,7 @@ public class ZenithListeners extends BukkitRunnable implements Listener {
 
         Vex subject = (Vex) player.getWorld().spawnEntity(player.getLocation(), EntityType.VEX);
         subject.setTarget(target);
+        subject.setCustomName(player.getDisplayName() + "'s Zenith");
 
         AttributeInstance subjectAttribute = subject.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
         AttributeInstance playerAttribute = player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
