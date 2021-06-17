@@ -2,6 +2,7 @@ package com.xethlyx.plugins.xenchant.enchants;
 
 import com.xethlyx.plugins.xenchant.XEnchant;
 import com.xethlyx.plugins.xenchant.util.EnchantUtil;
+import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
@@ -88,7 +89,7 @@ public class ZenithListeners extends BukkitRunnable implements Listener {
 
         Vex subject = (Vex) player.getWorld().spawnEntity(player.getLocation(), EntityType.VEX);
         subject.setTarget(target);
-        subject.setCustomName(player.getDisplayName() + "'s Zenith");
+        subject.setCustomName(player.getDisplayName() + ChatColor.GRAY + "'s Zenith");
 
         AttributeInstance subjectAttribute = subject.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
         AttributeInstance playerAttribute = player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
