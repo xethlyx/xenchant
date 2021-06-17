@@ -15,6 +15,8 @@ public class XEnchant extends JavaPlugin {
     public void onEnable() {
         Instance = this;
 
+        saveDefaultConfig();
+
         getLogger().info("Starting initialization of enchants..");
         this.getCommand("xenchant").setExecutor(new XEnchantCommand());
         this.getCommand("xenchant").setTabCompleter(new XEnchantTabCompleter());
@@ -31,6 +33,7 @@ public class XEnchant extends JavaPlugin {
         new Insomniac().registerEnchant();
         new Meridian().registerEnchant();
         new Soulbound().registerEnchant();
+        new Zenith().registerEnchant();
         
         // Do other stuff
 

@@ -4,7 +4,6 @@ import com.xethlyx.plugins.xenchant.util.EnchantUtil;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -18,7 +17,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import java.io.Console;
 import java.util.*;
 
 public class MeridianListeners extends BukkitRunnable implements Listener {
@@ -33,7 +31,7 @@ public class MeridianListeners extends BukkitRunnable implements Listener {
 
         for (Block lineOfSightBlock : player.getLineOfSight(null, searchDistance)) {
             for (Entity nearbyEntity : lineOfSightBlock.getWorld().getNearbyEntities(lineOfSightBlock.getLocation(), 1, 1, 1)) {
-                if (nearbyEntity instanceof LivingEntity && !(nearbyEntity instanceof ArmorStand) && nearbyEntity != player)
+                if (nearbyEntity instanceof LivingEntity && !(nearbyEntity instanceof ArmorStand) && nearbyEntity != player && !nearbyEntity.isDead())
                     return (LivingEntity) nearbyEntity;
             }
         }
