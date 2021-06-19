@@ -17,7 +17,10 @@ public class EnchantListener implements Listener {
 
         if (first == null || second == null) return;
 
-        event.setResult(EnchantUtil.mergeEnchant(first, second, event.getResult()));
+        ItemStack newResult = EnchantUtil.mergeEnchant(first, second, event.getResult());
+        event.setResult(newResult);
+        
+        if (newResult == null) return;
         XEnchant.Instance.getServer().getScheduler().runTask(XEnchant.Instance, () -> anvilInventory.setRepairCost(5));
     }
 }
