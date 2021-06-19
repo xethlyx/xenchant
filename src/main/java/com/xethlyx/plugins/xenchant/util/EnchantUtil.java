@@ -2,14 +2,16 @@ package com.xethlyx.plugins.xenchant.util;
 
 import com.xethlyx.plugins.xenchant.Enchant;
 import com.xethlyx.plugins.xenchant.EnchantRegistry;
-import com.xethlyx.plugins.xenchant.XEnchant;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class EnchantUtil {
     public static final HashMap<String, Integer> RomanNumeralConversion = new HashMap<String, Integer>() {{
@@ -167,7 +169,7 @@ public class EnchantUtil {
         if (first.getType() != second.getType() && second.getType() != Material.ENCHANTED_BOOK) return null;
 
         HashMap<Enchant<? extends Listener>, Integer> secondEnchants = getEnchants(second);
-        if (secondEnchants.size() == 0) return result;
+        if (secondEnchants.size() == 0) return null;
 
         HashMap<Enchant<? extends Listener>, Integer> newEnchants = getEnchants(first);
 
