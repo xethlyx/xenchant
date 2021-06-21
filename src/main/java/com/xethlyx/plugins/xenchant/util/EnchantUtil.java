@@ -66,10 +66,11 @@ public class EnchantUtil {
 
     public static <T extends Listener> int parseEnchant(Enchant<T> enchant, ItemStack item) {
         if (item == null) return 0;
-
         if (item.getItemMeta() == null) return 0;
 
-        List<String> itemLore = item.getItemMeta().getLore();
+        ItemMeta itemMeta = item.getItemMeta();
+        if (itemMeta == null) return 0;
+        List<String> itemLore = itemMeta.getLore();
         if (itemLore == null) return 0;
 
         for (String lore : itemLore) {
@@ -78,7 +79,11 @@ public class EnchantUtil {
             }
 
             if (matchEnchant(lore, enchant.Name)) {
-                return RomanNumeralConversion.get(lore.substring(enchant.Name.length() + 3));
+                String levelString = lore.substring(enchant.Name.length() + 3);
+
+                // Gracefully fail on invalid enchant level
+                if (!RomanNumeralConversion.containsKey(levelString)) return 0;
+                return RomanNumeralConversion.get(levelString);
             }
         }
 
