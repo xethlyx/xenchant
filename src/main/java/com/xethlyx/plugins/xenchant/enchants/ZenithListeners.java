@@ -104,7 +104,7 @@ public class ZenithListeners extends BukkitRunnable implements Listener {
         Player player = subjectOwners.get(subject);
 
         List<Vex> currentSubjects = zenithSubjects.get(player);
-        currentSubjects.remove(subject);
+        if (currentSubjects != null) currentSubjects.remove(subject);
         subjectOwners.remove(subject);
         subject.remove();
     }
